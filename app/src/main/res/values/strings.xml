@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">WorkPilot</string>
+
+    <string name="splash_tagline">Work Smarter.\nManage Better.</string>
 </resources>

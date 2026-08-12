@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -38,6 +40,12 @@ android {
     }
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("org.jetbrains.kotlin:kotlin-stdlib:2.2.10")
+    }
+}
+
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -54,4 +62,26 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    //Compose Foundation
+    implementation(libs.androidx.foundation)
+
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    implementation(libs.androidx.navigation.compose)
+
+    implementation(libs.retrofit)
+
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging.interceptor)
+
+    implementation(libs.androidx.datastore.preferences)
+
+    implementation(libs.coil.compose)
+
+    implementation(libs.androidx.compose.material3.window)
+
+    implementation(libs.androidx.core.splashscreen)
 }

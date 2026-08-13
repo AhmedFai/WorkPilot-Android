@@ -2,4 +2,28 @@
     <string name="app_name">WorkPilot</string>
 
     <string name="splash_tagline">Work Smarter.\nManage Better.</string>
+
+    <string name="onboarding_page_1_title">Manage Your Workplace Effortlessly</string>
+
+    <string name="onboarding_page_1_description">Projects, Tasks, Attendance — Everything in one place.</string>
+
+    <string name="onboarding_page_2_title">Track Attendance with Ease</string>
+
+    <string name="onboarding_page_2_description">Check in, stay organized, and keep your attendance up to date.</string>
+
+    <string name="onboarding_page_3_title">Work Better, Together</string>
+
+    <string name="onboarding_page_3_description">Keep your team connected and get work done together.</string>
+
+    <string name="onboarding_next">Next</string>
+
+    <string name="onboarding_get_started">Get Started</string>
+
+    <string name="onboarding_page_indicator">Onboarding page %1$d of %2$d</string>
+
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_lets_go">Let\'s Go</string>
+    <string name="onboarding_previous_page">Previous page</string>
+    <string name="onboarding_next_page">Next page</string>
+
 </resources>

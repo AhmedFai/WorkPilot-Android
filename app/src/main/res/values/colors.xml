@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="work_pilot_background">#F8F9FC</color>
-    <color name="work_pilot_splash_icon_background">#F8F9FC</color>
+    <color name="work_pilot_background">#F8FAFC</color>
+    <color name="work_pilot_splash_icon_background">#F8FAFC</color>
 </resources>

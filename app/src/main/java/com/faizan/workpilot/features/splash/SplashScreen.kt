@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,22 +31,42 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.faizan.workpilot.R
 import com.faizan.workpilot.core.ui.theme.dimens
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    onSplashFinished: () -> Unit,
+    onSplashFinished: (Boolean) -> Unit,
+    viewModel: SplashViewModel = hiltViewModel()
 ) {
 
-    var showContent by remember { mutableStateOf(false) }
+    var showContent by remember {
+        mutableStateOf(false)
+    }
+
     val dimens = MaterialTheme.dimens
+
+    val isOnboardingCompleted by viewModel
+        .isOnboardingCompleted
+        .collectAsState()
 
     LaunchedEffect(Unit) {
         showContent = true
-        delay(180000)
-        onSplashFinished()
+    }
+
+    LaunchedEffect(isOnboardingCompleted) {
+
+        if (isOnboardingCompleted != null) {
+
+            delay(1200)
+
+            onSplashFinished(
+                isOnboardingCompleted
+                    ?: false
+            )
+        }
     }
 
     Column(
@@ -80,16 +101,19 @@ fun SplashScreen(
                 )
 
                 Text(
-                    text = stringResource(R.string.app_name),
+                    text = stringResource(
+                        R.string.app_name
+                    ),
                     style = MaterialTheme.typography.headlineLarge,
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
                 Text(
-                    text = stringResource(R.string.splash_tagline),
+                    text = stringResource(
+                        R.string.splash_tagline
+                    ),
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onBackground,
-                    textAlign = TextAlign.Center,
                     modifier = Modifier.padding(
                         top = dimens.spaceM
                     )
@@ -107,5 +131,4 @@ fun SplashScreen(
             alignment = Alignment.BottomCenter
         )
     }
-
 }

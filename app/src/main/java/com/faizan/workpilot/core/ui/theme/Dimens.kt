@@ -5,6 +5,8 @@ import androidx.compose.ui.unit.dp
 
 data class Dimens(
 
+    val indicatorSize: Dp = 8.dp,
+    val indicatorSelectedSize: Dp = 10.dp,
     // Spacing
     val space2XS: Dp = 4.dp,
     val spaceXS: Dp = 8.dp,

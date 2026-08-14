@@ -2,35 +2,51 @@ package com.faizan.workpilot.features.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.faizan.workpilot.features.login.domain.usecase.GetLoginSessionUseCase
 import com.faizan.workpilot.features.onboarding.domain.usecase.GetOnboardingStatusUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val getOnboardingStatusUseCase: GetOnboardingStatusUseCase
+    private val getOnboardingStatusUseCase: GetOnboardingStatusUseCase,
+    private val getLoginSessionUseCase: GetLoginSessionUseCase
 ) : ViewModel() {
 
-    private val _isOnboardingCompleted =
-        MutableStateFlow<Boolean?>(null)
+    private val _uiState =
+        MutableStateFlow(SplashUiState())
 
-    val isOnboardingCompleted: StateFlow<Boolean?> =
-        _isOnboardingCompleted.asStateFlow()
+    val uiState: StateFlow<SplashUiState> =
+        _uiState.asStateFlow()
 
     init {
-        observeOnboardingStatus()
+        observeAppState()
     }
 
-    private fun observeOnboardingStatus() {
+    private fun observeAppState() {
+
         viewModelScope.launch {
-            getOnboardingStatusUseCase()
-                .collect { isCompleted ->
-                    _isOnboardingCompleted.value = isCompleted
-                }
+
+            combine(
+                getOnboardingStatusUseCase(),
+                getLoginSessionUseCase()
+            ) { isOnboardingCompleted, loginSession ->
+
+                SplashUiState(
+                    isOnboardingCompleted = isOnboardingCompleted,
+                    isLoggedIn = loginSession != null,
+                    isReady = true
+                )
+
+            }.collect { state ->
+
+                _uiState.value = state
+            }
         }
     }
 }

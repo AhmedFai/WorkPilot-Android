@@ -1,5 +1,6 @@
 package com.faizan.workpilot.navigation
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,16 +22,24 @@ fun AppNavigation() {
         composable(AppRoutes.SPLASH) {
 
             SplashScreen(
-                onSplashFinished = { isOnboardingCompleted ->
+                onSplashFinished = {
+                        isOnboardingCompleted,
+                        isLoggedIn ->
 
                     val destination =
-                        if (isOnboardingCompleted) {
-                            AppRoutes.LOGIN
-                        } else {
-                            AppRoutes.ONBOARDING
+                        when {
+                            !isOnboardingCompleted ->
+                                AppRoutes.ONBOARDING
+
+                            isLoggedIn ->
+                                AppRoutes.DASHBOARD
+
+                            else ->
+                                AppRoutes.LOGIN
                         }
 
                     navController.navigate(destination) {
+
                         popUpTo(AppRoutes.SPLASH) {
                             inclusive = true
                         }
@@ -56,7 +65,19 @@ fun AppNavigation() {
         }
 
         composable(AppRoutes.LOGIN) {
-             LoginScreen()
+            LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate(AppRoutes.DASHBOARD) {
+                        popUpTo(AppRoutes.LOGIN) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
+        }
+
+        composable(AppRoutes.DASHBOARD) {
+            Text("Dashboard")
         }
     }
 }

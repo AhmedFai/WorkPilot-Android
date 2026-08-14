@@ -17,20 +17,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.faizan.workpilot.R
 import com.faizan.workpilot.core.ui.theme.dimens
@@ -38,7 +36,10 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    onSplashFinished: (Boolean) -> Unit,
+    onSplashFinished: (
+        isOnboardingCompleted: Boolean,
+        isLoggedIn: Boolean
+    ) -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
 
@@ -48,23 +49,23 @@ fun SplashScreen(
 
     val dimens = MaterialTheme.dimens
 
-    val isOnboardingCompleted by viewModel
-        .isOnboardingCompleted
+    val uiState by viewModel
+        .uiState
         .collectAsState()
 
     LaunchedEffect(Unit) {
         showContent = true
     }
 
-    LaunchedEffect(isOnboardingCompleted) {
+    LaunchedEffect(uiState.isReady) {
 
-        if (isOnboardingCompleted != null) {
+        if (uiState.isReady) {
 
             delay(1200)
 
             onSplashFinished(
-                isOnboardingCompleted
-                    ?: false
+                uiState.isOnboardingCompleted,
+                uiState.isLoggedIn
             )
         }
     }

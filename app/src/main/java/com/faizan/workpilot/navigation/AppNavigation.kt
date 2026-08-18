@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.faizan.workpilot.features.dashboard.presentation.screen.AdminDashboardRoute
 import com.faizan.workpilot.features.login.presentation.screen.LoginScreen
 import com.faizan.workpilot.features.onboarding.presentation.screen.OnboardingScreen
 import com.faizan.workpilot.features.splash.SplashScreen
@@ -32,7 +33,7 @@ fun AppNavigation() {
                                 AppRoutes.ONBOARDING
 
                             isLoggedIn ->
-                                AppRoutes.DASHBOARD
+                                AppRoutes.ADMIN_DASHBOARD
 
                             else ->
                                 AppRoutes.LOGIN
@@ -67,7 +68,7 @@ fun AppNavigation() {
         composable(AppRoutes.LOGIN) {
             LoginScreen(
                 onLoginSuccess = {
-                    navController.navigate(AppRoutes.DASHBOARD) {
+                    navController.navigate(AppRoutes.ADMIN_DASHBOARD) {
                         popUpTo(AppRoutes.LOGIN) {
                             inclusive = true
                         }
@@ -78,6 +79,55 @@ fun AppNavigation() {
 
         composable(AppRoutes.DASHBOARD) {
             Text("Dashboard")
+        }
+
+        composable(AppRoutes.ADMIN_DASHBOARD) {
+
+            AdminDashboardRoute(
+
+                onUsersClick = {
+                    navController.navigate(
+                        AppRoutes.USERS
+                    )
+                },
+
+                onProjectsClick = {
+                    navController.navigate(
+                        AppRoutes.PROJECTS
+                    )
+                },
+
+                onTasksClick = {
+                    navController.navigate(
+                        AppRoutes.TASKS
+                    )
+                },
+
+                onReportsClick = {
+                    navController.navigate(
+                        AppRoutes.REPORTS
+                    )
+                },
+
+                onProjectClick = { projectId ->
+                    // later:
+                    // navController.navigate(
+                    //     "${AppRoutes.PROJECT_DETAILS}/$projectId"
+                    // )
+                },
+
+                onSearchClick = {
+                    // later
+                },
+
+                onProfileClick = {
+                    // later
+                },
+
+                onNotificationClick = {
+                    // later
+                }
+            )
         }
     }
 }

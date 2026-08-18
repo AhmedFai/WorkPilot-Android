@@ -1,31 +1,21 @@
 <resources>
     <string name="app_name">WorkPilot</string>
 
+    <!-- Splash / Onboarding -->
     <string name="splash_tagline">Work Smarter.\nManage Better.</string>
-
     <string name="onboarding_page_1_title">Manage Your Workplace Effortlessly</string>
-
     <string name="onboarding_page_1_description">Projects, Tasks, Attendance — Everything in one place.</string>
-
     <string name="onboarding_page_2_title">Track Attendance with Ease</string>
-
     <string name="onboarding_page_2_description">Check in, stay organized, and keep your attendance up to date.</string>
-
     <string name="onboarding_page_3_title">Work Better, Together</string>
-
     <string name="onboarding_page_3_description">Keep your team connected and get work done together.</string>
-
     <string name="onboarding_next">Next</string>
-
     <string name="onboarding_get_started">Get Started</string>
-
     <string name="onboarding_page_indicator">Onboarding page %1$d of %2$d</string>
-
     <string name="onboarding_skip">Skip</string>
     <string name="onboarding_lets_go">Let\'s Go</string>
     <string name="onboarding_previous_page">Previous page</string>
     <string name="onboarding_next_page">Next page</string>
-
 
     <!-- Login -->
     <string name="login_welcome_back">Welcome Back</string>
@@ -40,12 +30,14 @@
     <string name="login_google">Google</string>
     <string name="login_no_account">Don\'nt have an account?</string>
     <string name="login_contact_admin">Contact Admin</string>
+
     <!-- Login validation -->
     <string name="login_error_email_required">Email is required</string>
     <string name="login_error_email_invalid">Enter a valid email address</string>
     <string name="login_error_password_required">Password is required</string>
     <string name="login_error_password_min_length">Password must be at least %1$d characters</string>
     <string name="login_error_password_max_length">Password must not exceed %1$d characters</string>
+
     <!-- Password visibility -->
     <string name="login_password_show">Show password</string>
     <string name="login_password_hide">Hide password</string>
@@ -60,5 +52,23 @@
     <string name="error_request_failed">Request failed</string>
     <string name="error_no_connection">Unable to connect to server</string>
     <string name="error_unknown">Something went wrong</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_greeting_morning">Good Morning,</string>
+    <string name="dashboard_greeting_afternoon">Good Afternoon,</string>
+    <string name="dashboard_greeting_evening">Good Evening,</string>
+    <string name="dashboard_greeting_night">Good Night</string>
+    <string name="dashboard_company">Company</string>
+    <string name="dashboard_company_admin">Company Admin</string>
+    <string name="dashboard_employees">Employees</string>
+    <string name="dashboard_projects">Projects</string>
+    <string name="dashboard_tasks">Tasks</string>
+    <string name="dashboard_quick_actions">Quick Actions</string>
+    <string name="dashboard_recent_projects">Recent Projects</string>
+    <string name="dashboard_users">Users</string>
+    <string name="dashboard_reports">Reports</string>
+    <string name="dashboard_search">Search</string>
+    <string name="dashboard_notifications">Notifications</string>
+    <string name="dashboard_profile">Profile</string>
 
 </resources>

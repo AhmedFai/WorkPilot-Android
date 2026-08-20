@@ -29,7 +29,8 @@ import kotlinx.coroutines.launch
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val saveLoginSessionUseCase: SaveLoginSessionUseCase,
-    private val getLoginSessionUseCase: GetLoginSessionUseCase
+    private val getLoginSessionUseCase: GetLoginSessionUseCase,
+    private val networkErrorHandler: NetworkErrorHandler
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -177,8 +178,11 @@ class LoginViewModel @Inject constructor(
 
             } catch (exception: Exception) {
 
+                val networkError =
+                    networkErrorHandler.handle(exception)
+
                 val message =
-                    NetworkErrorHandler.getMessage(exception)
+                    networkError.message
 
                 _uiState.update {
                     it.copy(

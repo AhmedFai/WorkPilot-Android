@@ -32,6 +32,7 @@ fun AdminDashboardRoute(
         onProjectClick = onProjectClick,
         onSearchClick = onSearchClick,
         onProfileClick = onProfileClick,
-        onNotificationClick = onNotificationClick
+        onNotificationClick = onNotificationClick,
+        onRetry = viewModel::retry
     )
 }

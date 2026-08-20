@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -27,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.faizan.workpilot.R
+import com.faizan.workpilot.core.ui.components.ErrorContent
 import com.faizan.workpilot.core.ui.theme.dimens
 import com.faizan.workpilot.features.dashboard.presentation.model.DashboardAction
 import com.faizan.workpilot.features.dashboard.presentation.model.DashboardUiState
@@ -43,6 +45,7 @@ fun AdminDashboardScreen(
     onSearchClick: () -> Unit,
     onProfileClick: () -> Unit,
     onNotificationClick: () -> Unit,
+    onRetry: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -54,88 +57,105 @@ fun AdminDashboardScreen(
             )
     ) {
 
-        if (uiState.isLoading) {
+        when {
+            uiState.isLoading -> {
 
-            AdminDashboardShimmer(
-                modifier = Modifier.fillMaxSize()
-            )
-        }else{
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(
-                    horizontal = MaterialTheme.dimens.screenPaddingHorizontal,
-                    vertical = MaterialTheme.dimens.spaceM
-                ),
-                verticalArrangement = Arrangement.spacedBy(
-                    MaterialTheme.dimens.spaceM
+                AdminDashboardShimmer(
+                    modifier = Modifier.fillMaxSize()
                 )
-            ) {
+            }
 
-                item {
-                    DashboardHeader(
-                        greeting = uiState.greeting,
-                        userName = uiState.userName,
-                        onSearchClick = onSearchClick,
-                        onProfileClick = onProfileClick,
-                        onNotificationClick = onNotificationClick
+            uiState.error != null -> {
+
+                ErrorContent(
+                    error = uiState.error,
+                    onRetry = onRetry,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .wrapContentSize(
+                            Alignment.Center
+                        )
+                )
+            }
+
+            else -> {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(
+                        horizontal = MaterialTheme.dimens.screenPaddingHorizontal,
+                        vertical = MaterialTheme.dimens.spaceM
+                    ),
+                    verticalArrangement = Arrangement.spacedBy(
+                        MaterialTheme.dimens.spaceM
                     )
-                }
+                ) {
 
-                item {
-                    uiState.company?.let { company ->
-
-                        CompanyCard(
-                            companyName = company.name,
-                            email = company.email,
-                            logoUrl = uiState.company.logoUrl,
+                    item {
+                        DashboardHeader(
+                            greeting = uiState.greeting,
+                            userName = uiState.userName,
+                            onSearchClick = onSearchClick,
+                            onProfileClick = onProfileClick,
+                            onNotificationClick = onNotificationClick
                         )
                     }
-                }
 
-                item {
-                    DashboardStats(
-                        employeeCount = uiState.employeeCount,
-                        projectCount = uiState.projectCount,
-                        taskCount = uiState.taskCount
-                    )
-                }
+                    item {
+                        uiState.company?.let { company ->
 
-                item {
-                    SectionTitle(
-                        title = stringResource(
-                            R.string.dashboard_quick_actions
-                        )
-                    )
-                }
-
-                item {
-                    QuickActions(
-                        onUsersClick = onUsersClick,
-                        onProjectsClick = onProjectsClick,
-                        onTasksClick = onTasksClick,
-                        onReportsClick = onReportsClick
-                    )
-                }
-
-                item {
-                    SectionTitle(
-                        title = stringResource(
-                            R.string.dashboard_recent_projects
-                        )
-                    )
-                }
-
-                items(
-                    items = uiState.recentProjects,
-                    key = { it.id }
-                ) { project ->
-
-                    RecentProjectCard(
-                        project = project,
-                        onClick = {
-                            onProjectClick(project.id)
+                            CompanyCard(
+                                companyName = company.name,
+                                email = company.email,
+                                logoUrl = uiState.company.logoUrl,
+                            )
                         }
-                    )
+                    }
+
+                    item {
+                        DashboardStats(
+                            employeeCount = uiState.employeeCount,
+                            projectCount = uiState.projectCount,
+                            taskCount = uiState.taskCount
+                        )
+                    }
+
+                    item {
+                        SectionTitle(
+                            title = stringResource(
+                                R.string.dashboard_quick_actions
+                            )
+                        )
+                    }
+
+                    item {
+                        QuickActions(
+                            onUsersClick = onUsersClick,
+                            onProjectsClick = onProjectsClick,
+                            onTasksClick = onTasksClick,
+                            onReportsClick = onReportsClick
+                        )
+                    }
+
+                    item {
+                        SectionTitle(
+                            title = stringResource(
+                                R.string.dashboard_recent_projects
+                            )
+                        )
+                    }
+
+                    items(
+                        items = uiState.recentProjects,
+                        key = { it.id }
+                    ) { project ->
+
+                        RecentProjectCard(
+                            project = project,
+                            onClick = {
+                                onProjectClick(project.id)
+                            }
+                        )
+                    }
                 }
             }
         }

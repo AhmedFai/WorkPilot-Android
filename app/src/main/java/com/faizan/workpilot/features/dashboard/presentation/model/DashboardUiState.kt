@@ -2,6 +2,7 @@ package com.faizan.workpilot.features.dashboard.presentation.model
 
 import com.faizan.workpilot.R
 import com.faizan.workpilot.core.common.ui.text.UiText
+import com.faizan.workpilot.core.network.error.NetworkError
 
 data class DashboardUiState(
     val greeting: UiText = UiText.StringRes(
@@ -14,5 +15,5 @@ data class DashboardUiState(
     val taskCount: Int = 0,
     val recentProjects: List<RecentProjectUiModel> = emptyList(),
     val isLoading: Boolean = false,
-    val error: String? = null
+    val error: NetworkError? = null
 )

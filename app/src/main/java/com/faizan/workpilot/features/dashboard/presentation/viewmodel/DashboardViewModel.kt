@@ -3,7 +3,9 @@ package com.faizan.workpilot.features.dashboard.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.faizan.workpilot.R
+import com.faizan.workpilot.core.common.error.AppException
 import com.faizan.workpilot.core.common.ui.text.UiText
+import com.faizan.workpilot.core.network.error.NetworkErrorHandler
 import com.faizan.workpilot.features.dashboard.domain.usecase.GetAdminDashboardUseCase
 import com.faizan.workpilot.features.dashboard.presentation.mapper.toUiState
 import com.faizan.workpilot.features.dashboard.presentation.model.DashboardUiState
@@ -22,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
     private val getAdminDashboardUseCase: GetAdminDashboardUseCase,
-    private val getLoginSessionUseCase: GetLoginSessionUseCase
+    private val getLoginSessionUseCase: GetLoginSessionUseCase,
+    private val networkErrorHandler: NetworkErrorHandler
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(
@@ -34,6 +37,10 @@ class DashboardViewModel @Inject constructor(
 
     init {
         loadUserSession()
+        loadDashboard()
+    }
+
+    fun retry() {
         loadDashboard()
     }
 
@@ -84,12 +91,12 @@ class DashboardViewModel @Inject constructor(
                     )
                 }
 
-            } catch (exception: Exception) {
+            } catch (exception: AppException) {
 
                 _uiState.update {
                     it.copy(
                         isLoading = false,
-                        error = exception.message
+                        error = exception.error
                     )
                 }
             }

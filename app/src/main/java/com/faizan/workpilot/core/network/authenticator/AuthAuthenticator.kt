@@ -1,6 +1,7 @@
 package com.faizan.workpilot.core.network.authenticator
 
 import com.faizan.workpilot.core.datastore.TokenStorage
+import com.faizan.workpilot.core.datastore.UserSessionStorage
 import com.faizan.workpilot.core.network.api.RefreshApi
 import com.faizan.workpilot.features.login.data.model.RefreshTokenRequestDto
 import kotlinx.coroutines.flow.first
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 class AuthAuthenticator @Inject constructor(
     private val tokenStorage: TokenStorage,
+    private val userSessionStorage: UserSessionStorage,
     private val refreshApi: RefreshApi
 ) : Authenticator {
 
@@ -31,6 +33,10 @@ class AuthAuthenticator @Inject constructor(
                 tokenStorage.refreshToken.first()
 
             if (refreshToken.isNullOrBlank()) {
+
+                tokenStorage.clearTokens()
+                userSessionStorage.clearUserSession()
+
                 return@runBlocking null
             }
 
@@ -47,6 +53,10 @@ class AuthAuthenticator @Inject constructor(
                     refreshResponse.data.accessToken
 
                 if (newAccessToken.isBlank()) {
+
+                    tokenStorage.clearTokens()
+                    userSessionStorage.clearUserSession()
+
                     return@runBlocking null
                 }
 
@@ -63,6 +73,10 @@ class AuthAuthenticator @Inject constructor(
                     .build()
 
             } catch (_: Exception) {
+
+                tokenStorage.clearTokens()
+                userSessionStorage.clearUserSession()
+
                 null
             }
         }

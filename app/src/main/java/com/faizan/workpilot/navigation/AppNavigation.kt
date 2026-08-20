@@ -10,7 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.faizan.workpilot.core.session.SessionViewModel
-import com.faizan.workpilot.features.dashboard.presentation.screen.AdminDashboardRoute
+import com.faizan.workpilot.features.dashboard.admin.presentation.screen.AdminDashboardRoute
 import com.faizan.workpilot.features.login.presentation.screen.LoginScreen
 import com.faizan.workpilot.features.onboarding.presentation.screen.OnboardingScreen
 import com.faizan.workpilot.features.splash.SplashScreen

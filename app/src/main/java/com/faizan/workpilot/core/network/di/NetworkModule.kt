@@ -5,7 +5,7 @@ import com.faizan.workpilot.core.network.api.RefreshApi
 import com.faizan.workpilot.core.network.authenticator.AuthAuthenticator
 import com.faizan.workpilot.core.network.interceptor.AuthInterceptor
 import com.faizan.workpilot.core.network.interceptor.NetworkLoggingInterceptor
-import com.faizan.workpilot.features.dashboard.data.api.DashboardApi
+import com.faizan.workpilot.features.dashboard.admin.data.api.DashboardApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

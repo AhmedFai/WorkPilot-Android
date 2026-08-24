@@ -38,8 +38,15 @@ class SplashViewModel @Inject constructor(
             ) { isOnboardingCompleted, loginSession ->
 
                 SplashUiState(
-                    isOnboardingCompleted = isOnboardingCompleted,
-                    isLoggedIn = loginSession != null,
+                    isOnboardingCompleted =
+                        isOnboardingCompleted,
+
+                    isLoggedIn =
+                        loginSession != null,
+
+                    role =
+                        loginSession?.user?.role,
+
                     isReady = true
                 )
 

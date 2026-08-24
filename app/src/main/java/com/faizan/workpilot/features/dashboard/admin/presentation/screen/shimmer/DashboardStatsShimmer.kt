@@ -11,6 +11,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.faizan.workpilot.core.common.ui.component.shimmer.ShimmerBox
 import com.faizan.workpilot.core.ui.theme.dimens
 
 @Composable
@@ -42,7 +43,7 @@ fun DashboardStatsShimmer() {
                     )
                 ) {
 
-                    _root_ide_package_.com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer.ShimmerBox(
+                    ShimmerBox(
                         modifier = Modifier
                             .fillMaxWidth()
                             .size(
@@ -53,7 +54,7 @@ fun DashboardStatsShimmer() {
                             )
                     )
 
-                    _root_ide_package_.com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer.ShimmerBox(
+                    ShimmerBox(
                         modifier = Modifier
                             .fillMaxWidth(0.6f)
                             .size(

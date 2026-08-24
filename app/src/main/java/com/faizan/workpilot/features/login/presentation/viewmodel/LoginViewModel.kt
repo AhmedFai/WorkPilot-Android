@@ -171,7 +171,9 @@ class LoginViewModel @Inject constructor(
                 )
 
                 _uiEvent.emit(
-                    LoginUiEvent.LoginSuccess
+                    LoginUiEvent.LoginSuccess(
+                        role = result.user.role
+                    )
                 )
 
                 // Navigate to dashboard

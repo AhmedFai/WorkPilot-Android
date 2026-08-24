@@ -1,4 +1,4 @@
-package com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer
+package com.faizan.workpilot.core.common.ui.component.shimmer
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -7,6 +7,7 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -67,7 +68,7 @@ fun ShimmerBox(
         )
     )
 
-    androidx.compose.foundation.layout.Box(
+    Box(
         modifier = modifier.background(
             brush = brush,
             shape = shape

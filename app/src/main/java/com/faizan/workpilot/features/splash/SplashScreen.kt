@@ -38,7 +38,8 @@ import kotlinx.coroutines.delay
 fun SplashScreen(
     onSplashFinished: (
         isOnboardingCompleted: Boolean,
-        isLoggedIn: Boolean
+        isLoggedIn: Boolean,
+        role: String?
     ) -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -65,7 +66,8 @@ fun SplashScreen(
 
             onSplashFinished(
                 uiState.isOnboardingCompleted,
-                uiState.isLoggedIn
+                uiState.isLoggedIn,
+                uiState.role
             )
         }
     }

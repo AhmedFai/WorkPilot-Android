@@ -12,5 +12,7 @@ sealed interface LoginUiEvent {
         val message: UiText
     ) : LoginUiEvent
 
-    data object LoginSuccess : LoginUiEvent
+    data class LoginSuccess(
+        val role: String
+    ) : LoginUiEvent
 }

@@ -91,4 +91,15 @@ object NetworkModule {
         )
     }
 
+    @Provides
+    @Singleton
+    fun provideEmployeeDashboardApi(
+        retrofit: Retrofit
+    ): com.faizan.workpilot.features.dashboard.employee.data.api.DashboardApi {
+
+        return retrofit.create(
+            com.faizan.workpilot.features.dashboard.employee.data.api.DashboardApi::class.java
+        )
+    }
+
 }

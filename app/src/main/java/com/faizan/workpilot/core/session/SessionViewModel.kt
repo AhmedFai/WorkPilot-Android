@@ -15,8 +15,16 @@ class SessionViewModel @Inject constructor(
     getLoginSessionUseCase: GetLoginSessionUseCase
 ) : ViewModel() {
 
-    val isLoggedIn: StateFlow<Boolean> =
+    private val loginSession =
         getLoginSessionUseCase()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = null
+            )
+
+    val isLoggedIn: StateFlow<Boolean> =
+        loginSession
             .map { session ->
                 session != null
             }
@@ -24,5 +32,16 @@ class SessionViewModel @Inject constructor(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5_000),
                 initialValue = true
+            )
+
+    val userRole: StateFlow<String?> =
+        loginSession
+            .map { session ->
+                session?.user?.role
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = null
             )
 }

@@ -1,25 +1,26 @@
-package com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer
+package com.faizan.workpilot.features.dashboard.employee.presentation.screen.shimmer
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import com.faizan.workpilot.core.common.ui.component.shimmer.ShimmerBox
 import com.faizan.workpilot.core.ui.theme.dimens
 
 @Composable
-fun DashboardHeaderShimmer() {
+fun EmployeeDashboardHeaderShimmer(
+    modifier: Modifier = Modifier
+) {
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(
             MaterialTheme.dimens.spaceS
         ),
@@ -35,27 +36,17 @@ fun DashboardHeaderShimmer() {
 
             ShimmerBox(
                 modifier = Modifier
-                    .fillMaxWidth(
-                        0.55f
-                    )
-                    .size(
-                        height =
-                            MaterialTheme.dimens.spaceM,
-                        width =
-                            MaterialTheme.dimens.space2XL
+                    .fillMaxWidth(0.55f)
+                    .height(
+                        MaterialTheme.dimens.spaceM
                     )
             )
 
             ShimmerBox(
                 modifier = Modifier
-                    .fillMaxWidth(
-                        0.75f
-                    )
-                    .size(
-                        height =
-                            MaterialTheme.dimens.spaceL,
-                        width =
-                            MaterialTheme.dimens.space3XL
+                    .fillMaxWidth(0.75f)
+                    .height(
+                        MaterialTheme.dimens.spaceL
                     )
             )
         }
@@ -73,22 +64,10 @@ fun DashboardHeaderShimmer() {
         )
 
         ShimmerBox(
-            modifier = Modifier
-                .size(
-                    MaterialTheme.dimens.avatarS
-                )
-                .background(
-                    brush = Brush.linearGradient(
-                        listOf(
-                            MaterialTheme.colorScheme.surfaceVariant,
-                            MaterialTheme.colorScheme.onSurface.copy(
-                                alpha = 0.08f
-                            ),
-                            MaterialTheme.colorScheme.surfaceVariant
-                        )
-                    ),
-                    shape = CircleShape
-                )
+            modifier = Modifier.size(
+                MaterialTheme.dimens.avatarS
+            ),
+            shape = CircleShape
         )
     }
 }

@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.faizan.workpilot.core.common.ui.component.shimmer.ShimmerBox
 import com.faizan.workpilot.core.ui.theme.dimens
 
 @Composable
@@ -38,7 +39,7 @@ fun RecentProjectCardShimmer() {
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            _root_ide_package_.com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer.ShimmerBox(
+            ShimmerBox(
                 modifier = Modifier.size(
                     MaterialTheme.dimens.iconL
                 )
@@ -51,7 +52,7 @@ fun RecentProjectCardShimmer() {
                 )
             ) {
 
-                _root_ide_package_.com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer.ShimmerBox(
+                ShimmerBox(
                     modifier = Modifier
                         .fillMaxWidth(0.7f)
                         .size(
@@ -62,7 +63,7 @@ fun RecentProjectCardShimmer() {
                         )
                 )
 
-                _root_ide_package_.com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer.ShimmerBox(
+                ShimmerBox(
                     modifier = Modifier
                         .fillMaxWidth(0.45f)
                         .size(
@@ -74,7 +75,7 @@ fun RecentProjectCardShimmer() {
                 )
             }
 
-            _root_ide_package_.com.faizan.workpilot.features.dashboard.admin.presentation.screen.shimmer.ShimmerBox(
+            ShimmerBox(
                 modifier = Modifier
                     .size(
                         width =

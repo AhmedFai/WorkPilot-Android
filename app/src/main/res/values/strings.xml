@@ -71,5 +71,7 @@
     <string name="dashboard_search">Search</string>
     <string name="dashboard_notifications">Notifications</string>
     <string name="dashboard_profile">Profile</string>
+    <string name="employee_today_tasks">Today\'s Tasks</string>
+    <string name="employee_sort_tasks">Sort tasks</string>
 
 </resources>

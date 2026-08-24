@@ -45,7 +45,7 @@ import com.faizan.workpilot.features.login.presentation.viewmodel.LoginViewModel
 
 @Composable
 fun LoginScreen(
-    onLoginSuccess: () -> Unit,
+    onLoginSuccess: (String) -> Unit,
     viewModel: LoginViewModel = hiltViewModel()
 ) {
 
@@ -76,8 +76,8 @@ fun LoginScreen(
                     ).show()
                 }
 
-                LoginUiEvent.LoginSuccess -> {
-                    onLoginSuccess()
+                is LoginUiEvent.LoginSuccess -> {
+                    onLoginSuccess(event.role)
                 }
             }
         }

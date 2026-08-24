@@ -2,15 +2,11 @@ package com.faizan.workpilot.navigation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.faizan.workpilot.core.session.SessionViewModel
 import com.faizan.workpilot.features.dashboard.admin.presentation.screen.AdminDashboardRoute
+import com.faizan.workpilot.features.dashboard.employee.presentation.screen.EmployeeDashboardRoute
 import com.faizan.workpilot.features.login.presentation.screen.LoginScreen
 import com.faizan.workpilot.features.onboarding.presentation.screen.OnboardingScreen
 import com.faizan.workpilot.features.splash.SplashScreen
@@ -20,62 +16,59 @@ fun AppNavigation() {
 
     val navController = rememberNavController()
 
-    val sessionViewModel: SessionViewModel =
-        hiltViewModel()
-
-    val isLoggedIn by sessionViewModel
-        .isLoggedIn
-        .collectAsStateWithLifecycle()
-
-    LaunchedEffect(isLoggedIn) {
-
-        if (!isLoggedIn) {
-
-            navController.navigate(
-                AppRoutes.LOGIN
-            ) {
-                popUpTo(0) {
-                    inclusive = true
-                }
-                launchSingleTop = true
-            }
-        }
-    }
-
     NavHost(
         navController = navController,
         startDestination = AppRoutes.SPLASH
     ) {
 
+        // Splash
         composable(AppRoutes.SPLASH) {
 
             SplashScreen(
                 onSplashFinished = {
                         isOnboardingCompleted,
-                        isLoggedIn ->
+                        isLoggedIn,
+                        role ->
 
-                    val destination =
-                        when {
-                            !isOnboardingCompleted ->
-                                AppRoutes.ONBOARDING
+                    val destination = when {
 
-                            isLoggedIn ->
-                                AppRoutes.ADMIN_DASHBOARD
+                        !isOnboardingCompleted ->
+                            AppRoutes.ONBOARDING
 
-                            else ->
-                                AppRoutes.LOGIN
-                        }
+                        !isLoggedIn ->
+                            AppRoutes.LOGIN
+
+                        role == "ADMIN" ->
+                            AppRoutes.ADMIN_DASHBOARD
+
+                        role == "EMPLOYEE" ->
+                            AppRoutes.EMPLOYEE_DASHBOARD
+
+                        role == "PROJECT_HEAD" ->
+                            AppRoutes.EMPLOYEE_DASHBOARD
+
+                        role == "SUPER_ADMIN" ->
+                            AppRoutes.ADMIN_DASHBOARD
+
+                        else ->
+                            AppRoutes.LOGIN
+                    }
 
                     navController.navigate(destination) {
 
-                        popUpTo(AppRoutes.SPLASH) {
+                        popUpTo(
+                            AppRoutes.SPLASH
+                        ) {
                             inclusive = true
                         }
+
+                        launchSingleTop = true
                     }
                 }
             )
         }
 
+        // Onboarding
         composable(AppRoutes.ONBOARDING) {
 
             OnboardingScreen(
@@ -84,31 +77,68 @@ fun AppNavigation() {
                     navController.navigate(
                         AppRoutes.LOGIN
                     ) {
-                        popUpTo(AppRoutes.ONBOARDING) {
+
+                        popUpTo(
+                            AppRoutes.ONBOARDING
+                        ) {
                             inclusive = true
                         }
+
+                        launchSingleTop = true
                     }
                 }
             )
         }
 
+        // Login
         composable(AppRoutes.LOGIN) {
+
             LoginScreen(
-                onLoginSuccess = {
-                    navController.navigate(AppRoutes.ADMIN_DASHBOARD) {
-                        popUpTo(AppRoutes.LOGIN) {
+                onLoginSuccess = { role ->
+
+                    val destination = when (role) {
+
+                        "ADMIN" ->
+                            AppRoutes.ADMIN_DASHBOARD
+
+                        "EMPLOYEE" ->
+                            AppRoutes.EMPLOYEE_DASHBOARD
+
+                        "PROJECT_HEAD" ->
+                            AppRoutes.EMPLOYEE_DASHBOARD
+
+                        "SUPER_ADMIN" ->
+                            AppRoutes.ADMIN_DASHBOARD
+
+                        else ->
+                            AppRoutes.LOGIN
+                    }
+
+                    navController.navigate(
+                        destination
+                    ) {
+
+                        popUpTo(
+                            AppRoutes.LOGIN
+                        ) {
                             inclusive = true
                         }
+
+                        launchSingleTop = true
                     }
                 }
             )
         }
 
+        // Temporary
         composable(AppRoutes.DASHBOARD) {
             Text("Dashboard")
         }
 
-        composable(AppRoutes.ADMIN_DASHBOARD) {
+        // Admin Dashboard
+        composable(
+            AppRoutes.ADMIN_DASHBOARD
+        ) {
 
             AdminDashboardRoute(
 
@@ -136,23 +166,49 @@ fun AppNavigation() {
                     )
                 },
 
-                onProjectClick = { projectId ->
-                    // later:
-                    // navController.navigate(
-                    //     "${AppRoutes.PROJECT_DETAILS}/$projectId"
-                    // )
+                onProjectClick = {
+                    // Later
                 },
 
                 onSearchClick = {
-                    // later
+                    // Later
                 },
 
                 onProfileClick = {
-                    // later
+                    // Later
                 },
 
                 onNotificationClick = {
-                    // later
+                    // Later
+                }
+            )
+        }
+
+        // Employee Dashboard
+        composable(
+            AppRoutes.EMPLOYEE_DASHBOARD
+        ) {
+
+            EmployeeDashboardRoute(
+
+                onSearchClick = {
+                    // Later
+                },
+
+                onProfileClick = {
+                    // Later
+                },
+
+                onNotificationClick = {
+                    // Later
+                },
+
+                onSortClick = {
+                    // Later
+                },
+
+                onTaskClick = {
+                    // Later
                 }
             )
         }

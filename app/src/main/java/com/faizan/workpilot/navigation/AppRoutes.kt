@@ -8,6 +8,7 @@ object AppRoutes {
     const val DASHBOARD = "dashboard"
     const val ADMIN_DASHBOARD = "admin_dashboard"
     const val EMPLOYEE_DASHBOARD = "employee_dashboard"
+    const val PROJECT_HEAD_DASHBOARD = "project_head_dashboard"
     const val USERS = "users"
     const val PROJECTS = "projects"
     const val TASKS = "tasks"

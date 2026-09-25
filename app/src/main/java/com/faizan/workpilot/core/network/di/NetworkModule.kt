@@ -6,6 +6,7 @@ import com.faizan.workpilot.core.network.authenticator.AuthAuthenticator
 import com.faizan.workpilot.core.network.interceptor.AuthInterceptor
 import com.faizan.workpilot.core.network.interceptor.NetworkLoggingInterceptor
 import com.faizan.workpilot.features.dashboard.admin.data.api.DashboardApi
+import com.faizan.workpilot.features.dashboard.projectHead.data.api.ProjectHeadDashboardApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -99,6 +100,17 @@ object NetworkModule {
 
         return retrofit.create(
             com.faizan.workpilot.features.dashboard.employee.data.api.DashboardApi::class.java
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideProjectHeadDashboardApi(
+        retrofit: Retrofit
+    ): ProjectHeadDashboardApi {
+
+        return retrofit.create(
+            ProjectHeadDashboardApi::class.java
         )
     }
 

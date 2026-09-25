@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.faizan.workpilot.features.dashboard.admin.presentation.screen.AdminDashboardRoute
 import com.faizan.workpilot.features.dashboard.employee.presentation.screen.EmployeeDashboardRoute
+import com.faizan.workpilot.features.dashboard.projectHead.presentation.screen.ProjectHeadDashboardRoute
 import com.faizan.workpilot.features.login.presentation.screen.LoginScreen
 import com.faizan.workpilot.features.onboarding.presentation.screen.OnboardingScreen
 import com.faizan.workpilot.features.splash.SplashScreen
@@ -45,7 +46,7 @@ fun AppNavigation() {
                             AppRoutes.EMPLOYEE_DASHBOARD
 
                         role == "PROJECT_HEAD" ->
-                            AppRoutes.EMPLOYEE_DASHBOARD
+                            AppRoutes.PROJECT_HEAD_DASHBOARD
 
                         role == "SUPER_ADMIN" ->
                             AppRoutes.ADMIN_DASHBOARD
@@ -105,7 +106,7 @@ fun AppNavigation() {
                             AppRoutes.EMPLOYEE_DASHBOARD
 
                         "PROJECT_HEAD" ->
-                            AppRoutes.EMPLOYEE_DASHBOARD
+                            AppRoutes.PROJECT_HEAD_DASHBOARD
 
                         "SUPER_ADMIN" ->
                             AppRoutes.ADMIN_DASHBOARD
@@ -212,5 +213,25 @@ fun AppNavigation() {
                 }
             )
         }
+
+        composable(
+            AppRoutes.PROJECT_HEAD_DASHBOARD
+        ) {
+            ProjectHeadDashboardRoute(
+                onSearchClick = {
+                    // TODO
+                },
+                onProfileClick = {
+                    // TODO
+                },
+                onNotificationClick = {
+                    // TODO
+                },
+                onProjectClick = { projectId ->
+                    // TODO
+                }
+            )
+        }
+
     }
 }

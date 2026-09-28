@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.faizan.workpilot.features.dashboard.admin.presentation.screen.AdminDashboardRoute
 import com.faizan.workpilot.features.dashboard.employee.presentation.screen.EmployeeDashboardRoute
 import com.faizan.workpilot.features.dashboard.projectHead.presentation.screen.ProjectHeadDashboardRoute
+import com.faizan.workpilot.features.dashboard.superAdmin.presentation.screen.SuperAdminDashboardRoute
 import com.faizan.workpilot.features.login.presentation.screen.LoginScreen
 import com.faizan.workpilot.features.onboarding.presentation.screen.OnboardingScreen
 import com.faizan.workpilot.features.splash.SplashScreen
@@ -49,7 +50,7 @@ fun AppNavigation() {
                             AppRoutes.PROJECT_HEAD_DASHBOARD
 
                         role == "SUPER_ADMIN" ->
-                            AppRoutes.ADMIN_DASHBOARD
+                            AppRoutes.SUPER_ADMIN_DASHBOARD
 
                         else ->
                             AppRoutes.LOGIN
@@ -109,7 +110,7 @@ fun AppNavigation() {
                             AppRoutes.PROJECT_HEAD_DASHBOARD
 
                         "SUPER_ADMIN" ->
-                            AppRoutes.ADMIN_DASHBOARD
+                            AppRoutes.SUPER_ADMIN_DASHBOARD
 
                         else ->
                             AppRoutes.LOGIN
@@ -129,11 +130,6 @@ fun AppNavigation() {
                     }
                 }
             )
-        }
-
-        // Temporary
-        composable(AppRoutes.DASHBOARD) {
-            Text("Dashboard")
         }
 
         // Admin Dashboard
@@ -214,6 +210,7 @@ fun AppNavigation() {
             )
         }
 
+        // project head dashboard
         composable(
             AppRoutes.PROJECT_HEAD_DASHBOARD
         ) {
@@ -229,6 +226,17 @@ fun AppNavigation() {
                 },
                 onProjectClick = { projectId ->
                     // TODO
+                }
+            )
+        }
+
+        // super admin dashboard
+        composable(
+            route = AppRoutes.SUPER_ADMIN_DASHBOARD
+        ) {
+            SuperAdminDashboardRoute(
+                onCompanyClick = { companyId ->
+                    // TODO: company selection flow
                 }
             )
         }

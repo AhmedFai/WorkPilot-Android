@@ -73,5 +73,7 @@
     <string name="dashboard_profile">Profile</string>
     <string name="employee_today_tasks">Today\'s Tasks</string>
     <string name="employee_sort_tasks">Sort tasks</string>
+    <string name="choose_a_company">Choose a company to continue</string>
+    <string name="Search_companies">Search companies</string>
 
 </resources>

@@ -14,4 +14,5 @@ object AppRoutes {
     const val PROJECTS = "projects"
     const val TASKS = "tasks"
     const val REPORTS = "reports"
+    const val CREATE_COMPANY = "create_company"
 }

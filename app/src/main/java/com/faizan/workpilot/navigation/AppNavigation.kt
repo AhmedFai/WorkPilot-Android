@@ -2,9 +2,14 @@ package com.faizan.workpilot.navigation
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.faizan.workpilot.features.company.presentation.screen.CreateCompanyRoute
 import com.faizan.workpilot.features.dashboard.admin.presentation.screen.AdminDashboardRoute
 import com.faizan.workpilot.features.dashboard.employee.presentation.screen.EmployeeDashboardRoute
 import com.faizan.workpilot.features.dashboard.projectHead.presentation.screen.ProjectHeadDashboardRoute
@@ -12,6 +17,7 @@ import com.faizan.workpilot.features.dashboard.superAdmin.presentation.screen.Su
 import com.faizan.workpilot.features.login.presentation.screen.LoginScreen
 import com.faizan.workpilot.features.onboarding.presentation.screen.OnboardingScreen
 import com.faizan.workpilot.features.splash.SplashScreen
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
 fun AppNavigation() {
@@ -234,9 +240,73 @@ fun AppNavigation() {
         composable(
             route = AppRoutes.SUPER_ADMIN_DASHBOARD
         ) {
+
+            val currentBackStackEntry by navController
+                .currentBackStackEntryAsState()
+
+            val companyCreated by currentBackStackEntry
+                ?.savedStateHandle
+                ?.getStateFlow(
+                    "company_created",
+                    false
+                )
+                ?.collectAsStateWithLifecycle()
+                ?: remember {
+                    mutableStateOf(false)
+                }
+
             SuperAdminDashboardRoute(
+
                 onCompanyClick = { companyId ->
                     // TODO: company selection flow
+                },
+
+                onSearchClick = {
+                    // Later
+                },
+
+                onProfileClick = {
+                    // Later
+                },
+
+                onNotificationClick = {
+                    // Later
+                },
+
+                onCreateCompanyClick = {
+                    navController.navigate(AppRoutes.CREATE_COMPANY)
+                },
+
+                companyCreated = companyCreated,
+
+                onCompanyCreatedHandled = {
+                    currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.set(
+                            "company_created",
+                            false
+                        )
+                }
+            )
+        }
+
+        // create company
+        composable(AppRoutes.CREATE_COMPANY) {
+            CreateCompanyRoute(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onCompanyCreated = {
+
+                    navController
+                        .previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set(
+                            "company_created",
+                            true
+                        )
+
+                    navController.popBackStack()
                 }
             )
         }

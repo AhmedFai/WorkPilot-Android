@@ -5,6 +5,7 @@ import com.faizan.workpilot.core.network.api.RefreshApi
 import com.faizan.workpilot.core.network.authenticator.AuthAuthenticator
 import com.faizan.workpilot.core.network.interceptor.AuthInterceptor
 import com.faizan.workpilot.core.network.interceptor.NetworkLoggingInterceptor
+import com.faizan.workpilot.features.company.data.api.CompanyApi
 import com.faizan.workpilot.features.dashboard.admin.data.api.DashboardApi
 import com.faizan.workpilot.features.dashboard.projectHead.data.api.ProjectHeadDashboardApi
 import com.faizan.workpilot.features.dashboard.superAdmin.data.api.SuperAdminDashboardApi
@@ -123,6 +124,14 @@ object NetworkModule {
         return retrofit.create(
             SuperAdminDashboardApi::class.java
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideCompanyApi(
+        retrofit: Retrofit
+    ): CompanyApi {
+        return retrofit.create(CompanyApi::class.java)
     }
 
 }

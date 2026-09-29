@@ -76,4 +76,25 @@
     <string name="choose_a_company">Choose a company to continue</string>
     <string name="Search_companies">Search companies</string>
 
+    <!--Company-->
+    <string name="create_company">Create Company</string>
+    <string name="create_company_title">Create a new company</string>
+    <string name="create_company_description">Enter the company details to create a new company.</string>
+    <string name="company_basic_information">Basic Information</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_email">Email</string>
+    <string name="company_phone">Phone</string>
+    <string name="company_website">Website</string>
+    <string name="company_address">Address</string>
+    <string name="company_address_line_1">Address Line 1</string>
+    <string name="company_address_line_2">Address Line 2</string>
+    <string name="company_city">City</string>
+    <string name="company_state">State</string>
+    <string name="company_postal_code">Postal Code</string>
+    <string name="company_country">Country</string>
+    <string name="company_error_name_required">Company name is required</string>
+    <string name="company_error_email_required">Email is required</string>
+    <string name="company_error_email_invalid">Enter a valid email address
+</string>
+
 </resources>

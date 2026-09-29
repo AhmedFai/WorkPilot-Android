@@ -9,10 +9,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -22,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.faizan.workpilot.R
@@ -35,6 +39,10 @@ import com.faizan.workpilot.features.dashboard.superAdmin.presentation.screen.sh
 fun SuperAdminDashboardScreen(
     uiState: SuperAdminDashboardUiState,
     onCompanyClick: (Long) -> Unit,
+    onSearchClick: () -> Unit,
+    onNotificationClick: () -> Unit,
+    onProfileClick: () -> Unit,
+    onCreateCompanyClick: () -> Unit,
     onRetry: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -77,83 +85,106 @@ fun SuperAdminDashboardScreen(
                 ErrorContent(
                     error = uiState.error,
                     onRetry = onRetry,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .wrapContentSize(
+                            Alignment.Center
+                        )
                 )
             }
 
             else -> {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(
-                        horizontal = MaterialTheme
-                            .dimens
-                            .screenPaddingHorizontal,
-                        vertical = MaterialTheme
-                            .dimens
-                            .spaceM
-                    ),
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(
+                            horizontal = MaterialTheme
+                                .dimens
+                                .screenPaddingHorizontal,
+                            vertical = MaterialTheme
+                                .dimens
+                                .spaceM
+                        ),
                     verticalArrangement = Arrangement.spacedBy(
                         MaterialTheme.dimens.spaceM
                     )
                 ) {
 
-                    item {
-                        DashboardHeader(
-                            greeting = uiState.greeting,
-                            userName = uiState.userName,
-                            onSearchClick = {
-                                // TODO
-                            },
-                            onProfileClick = {
-                                // TODO
-                            },
-                            onNotificationClick = {
-                                // TODO
-                            }
-                        )
-                    }
+                    DashboardHeader(
+                        greeting = uiState.greeting,
+                        userName = uiState.userName,
+                        onSearchClick = onSearchClick,
+                        onProfileClick = onProfileClick,
+                        onNotificationClick = onNotificationClick
+                    )
 
-                    item {
-                        Text(
-                            text = stringResource(R.string.choose_a_company),
-                            style = MaterialTheme.typography.headlineSmall
-                        )
-                    }
+                    Text(
+                        text = stringResource(
+                            R.string.choose_a_company
+                        ),
+                        style = MaterialTheme.typography.headlineSmall
+                    )
 
-                    item {
-                        OutlinedTextField(
-                            value = searchQuery,
-                            onValueChange = {
-                                searchQuery = it
-                            },
-                            modifier = Modifier.fillMaxWidth(),
-                            singleLine = true,
-                            leadingIcon = {
-                                Icon(
-                                    imageVector = Icons.Default.Search,
-                                    contentDescription = stringResource(R.string.Search_companies)
+                    OutlinedTextField(
+                        value = searchQuery,
+                        onValueChange = {
+                            searchQuery = it
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        singleLine = true,
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = stringResource(
+                                    R.string.Search_companies
                                 )
-                            },
-                            placeholder = {
-                                Text(
-                                    text = stringResource(R.string.Search_companies)
+                            )
+                        },
+                        placeholder = {
+                            Text(
+                                text = stringResource(
+                                    R.string.Search_companies
                                 )
-                            }
-                        )
-                    }
-
-                    items(
-                        items = filteredCompanies,
-                        key = { company ->
-                            company.id
+                            )
                         }
-                    ) { company ->
+                    )
 
-                        SuperAdminCompanyCard(
-                            company = company,
-                            onClick = {
-                                onCompanyClick(company.id)
+                    LazyColumn(
+                        modifier = Modifier.weight(1f),
+                        contentPadding = PaddingValues(
+                            bottom = MaterialTheme.dimens.spaceS
+                        ),
+                        verticalArrangement = Arrangement.spacedBy(
+                            MaterialTheme.dimens.spaceM
+                        )
+                    ) {
+                        items(
+                            items = filteredCompanies,
+                            key = { company ->
+                                company.id
                             }
+                        ) { company ->
+
+                            SuperAdminCompanyCard(
+                                company = company,
+                                onClick = {
+                                    onCompanyClick(company.id)
+                                }
+                            )
+                        }
+                    }
+
+                    Button(
+                        onClick = onCreateCompanyClick,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = null
+                        )
+
+                        Text(
+                            text = stringResource(R.string.create_company)
                         )
                     }
                 }

@@ -15,4 +15,10 @@ object AppRoutes {
     const val TASKS = "tasks"
     const val REPORTS = "reports"
     const val CREATE_COMPANY = "create_company"
+    const val COMPANY_DASHBOARD = "company_dashboard/{companyId}"
+    fun companyDashboard(
+        companyId: Long
+    ): String {
+        return "company_dashboard/$companyId"
+    }
 }

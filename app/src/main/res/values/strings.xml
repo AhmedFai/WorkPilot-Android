@@ -94,7 +94,42 @@
     <string name="company_country">Country</string>
     <string name="company_error_name_required">Company name is required</string>
     <string name="company_error_email_required">Email is required</string>
-    <string name="company_error_email_invalid">Enter a valid email address
-</string>
+    <string name="company_error_email_invalid">Enter a valid email address</string>
+
+    <!--company management-->
+    <string name="company_dashboard_loading">Loading company...</string>
+    <string name="company_dashboard_please_wait">Please wait</string>
+    <string name="company_dashboard_something_went_wrong">Something went wrong</string>
+    <string name="company_dashboard_retry">Retry</string>
+
+    <string name="company_dashboard_active">Active</string>
+    <string name="company_dashboard_inactive">Inactive</string>
+
+    <string name="company_dashboard_users">Users</string>
+    <string name="company_dashboard_projects">Projects</string>
+    <string name="company_dashboard_tasks">Tasks</string>
+
+    <string name="company_dashboard_task_status">Task Status</string>
+    <string name="company_dashboard_pending">Pending: %1$d</string>
+    <string name="company_dashboard_in_progress">In Progress: %1$d</string>
+    <string name="company_dashboard_completed">Completed: %1$d</string>
+    <string name="company_dashboard_overdue">Overdue: %1$d</string>
+
+    <string name="company_dashboard_recent_activity">Recent Activity</string>
+    <string name="company_dashboard_admins">Admins</string>
+
+    <string name="company_dashboard_loading_value">...</string>
+
+    <!-- Company Dashboard -->
+
+    <string name="company_dashboard_overview">Overview</string>
+    <string name="company_dashboard_settings">Settings</string>
+    <string name="company_dashboard_last_30_days">Last 30 Days</string>
+    <string name="company_dashboard_view_all">View All →</string>
+    <string name="company_dashboard_pending_label">Pending</string>
+    <string name="company_dashboard_in_progress_label">In Progress</string>
+    <string name="company_dashboard_completed_label">Completed</string>
+    <string name="company_dashboard_overdue_label">Overdue</string>
+    <string name="common_back">Back</string>
 
 </resources>

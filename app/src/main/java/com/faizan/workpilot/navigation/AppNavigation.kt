@@ -18,6 +18,9 @@ import com.faizan.workpilot.features.login.presentation.screen.LoginScreen
 import com.faizan.workpilot.features.onboarding.presentation.screen.OnboardingScreen
 import com.faizan.workpilot.features.splash.SplashScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
+import com.faizan.workpilot.features.companyManagement.presentation.screen.CompanyDashboardRoute
 
 @Composable
 fun AppNavigation() {
@@ -258,7 +261,9 @@ fun AppNavigation() {
             SuperAdminDashboardRoute(
 
                 onCompanyClick = { companyId ->
-                    // TODO: company selection flow
+                    navController.navigate(
+                        AppRoutes.companyDashboard(companyId)
+                    )
                 },
 
                 onSearchClick = {
@@ -306,6 +311,28 @@ fun AppNavigation() {
                             true
                         )
 
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        // company dashboard
+        composable(
+            route = AppRoutes.COMPANY_DASHBOARD,
+            arguments = listOf(
+                navArgument("companyId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+
+            val companyId =
+                backStackEntry.arguments?.getLong("companyId")
+                    ?: return@composable
+
+            CompanyDashboardRoute(
+                companyId = companyId,
+                onBackClick = {
                     navController.popBackStack()
                 }
             )

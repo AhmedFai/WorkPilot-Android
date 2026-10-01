@@ -3,9 +3,9 @@ package com.faizan.workpilot.features.companyManagement.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.faizan.workpilot.core.network.error.NetworkErrorHandler
-import com.faizan.workpilot.features.companyManagement.domain.usecase.GetCompanyDashboardUseCase
-import com.faizan.workpilot.features.companyManagement.presentation.model.CompanyDashboardUiEvent
-import com.faizan.workpilot.features.companyManagement.presentation.model.CompanyDashboardUiState
+import com.faizan.workpilot.features.companyManagement.domain.usecase.dashboard.GetCompanyDashboardUseCase
+import com.faizan.workpilot.features.companyManagement.presentation.model.dashboard.CompanyDashboardUiEvent
+import com.faizan.workpilot.features.companyManagement.presentation.model.dashboard.CompanyDashboardUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow

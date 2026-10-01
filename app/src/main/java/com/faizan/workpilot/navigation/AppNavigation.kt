@@ -1,6 +1,5 @@
 package com.faizan.workpilot.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,7 +19,7 @@ import com.faizan.workpilot.features.splash.SplashScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.faizan.workpilot.features.companyManagement.presentation.screen.CompanyDashboardRoute
+import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.CompanyDashboardRoute
 
 @Composable
 fun AppNavigation() {

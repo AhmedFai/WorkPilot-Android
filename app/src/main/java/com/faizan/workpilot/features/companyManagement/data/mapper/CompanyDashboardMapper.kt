@@ -1,15 +1,15 @@
 package com.faizan.workpilot.features.companyManagement.data.mapper
 
-import com.faizan.workpilot.features.companyManagement.data.model.CompanyActivityPreviewDto
-import com.faizan.workpilot.features.companyManagement.data.model.CompanyAdminPreviewDto
-import com.faizan.workpilot.features.companyManagement.data.model.CompanyOverviewCompanyDto
-import com.faizan.workpilot.features.companyManagement.data.model.CompanyOverviewResponseDto
-import com.faizan.workpilot.features.companyManagement.data.model.CompanyTaskSummaryDto
-import com.faizan.workpilot.features.companyManagement.domain.model.CompanyActivityPreview
-import com.faizan.workpilot.features.companyManagement.domain.model.CompanyAdminPreview
-import com.faizan.workpilot.features.companyManagement.domain.model.CompanyDashboard
-import com.faizan.workpilot.features.companyManagement.domain.model.CompanyOverviewCompany
-import com.faizan.workpilot.features.companyManagement.domain.model.CompanyTaskSummary
+import com.faizan.workpilot.features.companyManagement.data.model.dashboard.CompanyActivityPreviewDto
+import com.faizan.workpilot.features.companyManagement.data.model.dashboard.CompanyAdminPreviewDto
+import com.faizan.workpilot.features.companyManagement.data.model.dashboard.CompanyOverviewCompanyDto
+import com.faizan.workpilot.features.companyManagement.data.model.dashboard.CompanyOverviewResponseDto
+import com.faizan.workpilot.features.companyManagement.data.model.dashboard.CompanyTaskSummaryDto
+import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.CompanyActivityPreview
+import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.CompanyAdminPreview
+import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.CompanyDashboard
+import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.CompanyOverviewCompany
+import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.CompanyTaskSummary
 
 fun CompanyOverviewResponseDto.toDomain(): CompanyDashboard {
 

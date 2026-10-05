@@ -135,9 +135,25 @@
     <string name="company_admins_add_admin">Add admin</string>
     <string name="company_admins_search_placeholder">Search admins...</string>
     <string name="company_admins_manage_title">Manage Company Admins</string>
-    <string name="company_admins_manage_description">
-    Add, view or deactivate admins for this company. Admins can manage users, projects and tasks within the company.
-</string>
+    <string name="company_admins_manage_description">Add, view or deactivate admins for this company. Admins can manage users, projects and tasks within the company.</string>
     <string name="company_admin_created_at">Created on %1$s</string>
+
+    <!-- Company Settings -->
+
+    <string name="company_settings_company">Company</string>
+    <string name="company_settings_company_information">Company Information</string>
+    <string name="company_settings_company_information_description">View company details</string>
+
+    <string name="company_settings_company_status">Company Status</string>
+    <string name="company_settings_active">Active</string>
+    <string name="company_settings_inactive">Inactive</string>
+
+    <string name="company_settings_administration">Administration</string>
+    <string name="company_settings_admin_management">Admin Management</string>
+    <string name="company_settings_admin_management_description">Manage company admins</string>
+
+    <string name="company_settings_danger_zone">Danger Zone</string>
+    <string name="company_settings_deactivate_company">Deactivate Company</string>
+    <string name="company_settings_deactivate_description">This will prevent all users of this company from accessing the platform. Data will be kept in the system.</string>
 
 </resources>

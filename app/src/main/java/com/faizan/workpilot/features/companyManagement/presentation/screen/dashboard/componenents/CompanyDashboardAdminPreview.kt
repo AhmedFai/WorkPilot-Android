@@ -1,5 +1,6 @@
 package com.faizan.workpilot.features.companyManagement.presentation.screen.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +25,8 @@ import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.Co
 
 @Composable
 fun CompanyDashboardAdminPreview(
-    admins: List<CompanyAdminPreview>
+    admins: List<CompanyAdminPreview>,
+    onViewAllClick: () -> Unit
 ) {
 
     val dimens = MaterialTheme.dimens
@@ -53,7 +55,10 @@ fun CompanyDashboardAdminPreview(
                     R.string.company_dashboard_view_all
                 ),
                 style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.clickable(
+                    onClick = onViewAllClick
+                )
             )
         }
 

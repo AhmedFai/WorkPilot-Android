@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -30,6 +31,12 @@ import androidx.compose.runtime.setValue
 import com.faizan.workpilot.features.companyManagement.presentation.model.admin.CompanyAdminsUiState
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.componenents.CompanyManagementTab
 import com.faizan.workpilot.features.companyManagement.presentation.screen.admins.CompanyAdminsScreen
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import com.faizan.workpilot.features.companyManagement.presentation.screen.settings.CompanySettingsScreen
+import kotlinx.coroutines.launch
 
 @Composable
 fun CompanyDashboardScreen(
@@ -46,9 +53,16 @@ fun CompanyDashboardScreen(
 
     val dimens = MaterialTheme.dimens
 
-    var selectedTab by rememberSaveable {
-        mutableStateOf(CompanyManagementTab.OVERVIEW)
-    }
+    val tabs = CompanyManagementTab.entries
+
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        pageCount = { tabs.size }
+    )
+
+    val coroutineScope = rememberCoroutineScope()
+
+    val selectedTab = tabs[pagerState.currentPage]
 
     when {
 
@@ -72,78 +86,106 @@ fun CompanyDashboardScreen(
                     onBackClick = onBackClick,
                     selectedTab = selectedTab,
                     onTabSelected = { tab ->
-
-                        selectedTab = tab
-
-                        if (tab == CompanyManagementTab.ADMINS) {
-                            onLoadAdmins()
+                        coroutineScope.launch {
+                            pagerState.animateScrollToPage(
+                                tabs.indexOf(tab)
+                            )
                         }
                     }
                 )
 
-                when (selectedTab) {
+                LaunchedEffect(pagerState.currentPage) {
+                    if (tabs[pagerState.currentPage] == CompanyManagementTab.ADMINS) {
+                        onLoadAdmins()
+                    }
+                }
 
-                    CompanyManagementTab.OVERVIEW -> {
+                HorizontalPager(
+                    state = pagerState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                ) { page ->
 
-                        LazyColumn(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .padding(
-                                    horizontal = dimens.screenPaddingHorizontal
+                    when (tabs[page]) {
+
+                        CompanyManagementTab.OVERVIEW -> {
+                            LazyColumn(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(
+                                        horizontal = dimens.screenPaddingHorizontal
+                                    ),
+                                contentPadding = PaddingValues(
+                                    top = dimens.spaceM,
+                                    bottom = dimens.spaceS
                                 ),
-                            contentPadding = PaddingValues(
-                                top = dimens.spaceM,
-                                bottom = dimens.spaceS
-                            ),
-                            verticalArrangement =
-                                Arrangement.spacedBy(
+                                verticalArrangement = Arrangement.spacedBy(
                                     dimens.spaceM
                                 )
-                        ) {
+                            ) {
+                                item {
+                                    CompanyDashboardStats(
+                                        totalUsers = dashboard.totalUsers,
+                                        activeProjects = dashboard.activeProjects,
+                                        totalTasks = dashboard.totalTasks
+                                    )
+                                }
 
-                            item {
-                                CompanyDashboardStats(
-                                    totalUsers = dashboard.totalUsers,
-                                    activeProjects = dashboard.activeProjects,
-                                    totalTasks = dashboard.totalTasks
-                                )
-                            }
+                                item {
+                                    CompanyDashboardTaskStatus(
+                                        taskSummary = dashboard.taskSummary
+                                    )
+                                }
 
-                            item {
-                                CompanyDashboardTaskStatus(
-                                    taskSummary = dashboard.taskSummary
-                                )
-                            }
+                                item {
+                                    CompanyDashboardRecentActivity(
+                                        activities = dashboard.recentActivities.take(4)
+                                    )
+                                }
 
-                            item {
-                                CompanyDashboardRecentActivity(
-                                    activities =
-                                        dashboard.recentActivities.take(4)
-                                )
-                            }
-
-                            item {
-                                CompanyDashboardAdminPreview(
-                                    admins =
-                                        dashboard.adminPreview.take(2)
-                                )
+                                item {
+                                    CompanyDashboardAdminPreview(
+                                        admins = dashboard.adminPreview.take(2),
+                                        onViewAllClick = {
+                                            coroutineScope.launch {
+                                                pagerState.animateScrollToPage(
+                                                    CompanyManagementTab.ADMINS.ordinal
+                                                )
+                                            }
+                                        }
+                                    )
+                                }
                             }
                         }
-                    }
 
-                    CompanyManagementTab.ADMINS -> {
+                        CompanyManagementTab.ADMINS -> {
+                            CompanyAdminsScreen(
+                                uiState = adminsUiState,
+                                onAddAdminClick = onAddAdminClick,
+                                onAdminClick = onAdminClick,
+                                onSearchQueryChange = onSearchQueryChange,
+                                onLoadNextPage = onLoadNextPage
+                            )
+                        }
 
-                        CompanyAdminsScreen(
-                            uiState = adminsUiState,
-                            onAddAdminClick = onAddAdminClick,
-                            onAdminClick = onAdminClick,
-                            onSearchQueryChange = onSearchQueryChange
-                        )
-                    }
-
-                    CompanyManagementTab.SETTINGS -> {
-
-                        // Settings screen will be implemented later.
+                        CompanyManagementTab.SETTINGS -> {
+                            CompanySettingsScreen(
+                                companyActive = dashboard.company.active,
+                                onCompanyInformationClick = {
+                                    // Later
+                                },
+                                onCompanyStatusClick = {
+                                    // Later
+                                },
+                                onAdminManagementClick = {
+                                    // Later
+                                },
+                                onDeactivateCompanyClick = {
+                                    // Later
+                                }
+                            )
+                        }
                     }
                 }
             }

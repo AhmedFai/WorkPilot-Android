@@ -10,11 +10,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.faizan.workpilot.features.companyManagement.presentation.model.dashboard.CompanyDashboardUiEvent
 import com.faizan.workpilot.features.companyManagement.presentation.viewmodel.CompanyAdminsViewModel
 import com.faizan.workpilot.features.companyManagement.presentation.viewmodel.CompanyDashboardViewModel
+import com.faizan.workpilot.features.companyManagement.presentation.viewmodel.companyInfo.CompanyInfoViewModel
 
 @Composable
 fun CompanyDashboardRoute(
     companyId: Long,
     onBackClick: () -> Unit,
+    onCompanyInformationClick: () -> Unit,
     viewModel: CompanyDashboardViewModel = hiltViewModel(),
     adminsViewModel: CompanyAdminsViewModel = hiltViewModel()
 ) {
@@ -58,6 +60,7 @@ fun CompanyDashboardRoute(
         uiState = uiState,
         adminsUiState = adminsUiState,
         onBackClick = onBackClick,
+        onCompanyInformationClick = onCompanyInformationClick,
         onRetry = {
             viewModel.retry(
                 companyId = companyId

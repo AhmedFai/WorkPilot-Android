@@ -21,4 +21,9 @@ object AppRoutes {
     ): String {
         return "company_dashboard/$companyId"
     }
+
+    const val COMPANY_INFORMATION = "company_information/{companyId}"
+    fun companyInformation(companyId: Long): String {
+        return "company_information/$companyId"
+    }
 }

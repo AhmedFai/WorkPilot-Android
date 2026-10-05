@@ -31,8 +31,7 @@ fun CompanySettingsScreen(
 
     LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
-            .navigationBarsPadding(),
+            .fillMaxSize(),
         contentPadding = PaddingValues(
             start = dimens.screenPaddingHorizontal,
             top = dimens.spaceM,

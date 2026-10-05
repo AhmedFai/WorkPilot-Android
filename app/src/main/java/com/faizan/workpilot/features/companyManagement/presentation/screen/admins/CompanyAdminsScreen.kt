@@ -56,7 +56,6 @@ fun CompanyAdminsScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .navigationBarsPadding()
     ) {
 
         // Fixed section

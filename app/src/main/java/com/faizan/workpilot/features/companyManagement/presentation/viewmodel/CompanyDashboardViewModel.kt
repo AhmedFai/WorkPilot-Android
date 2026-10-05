@@ -40,7 +40,7 @@ class CompanyDashboardViewModel @Inject constructor(
         companyId: Long
     ) {
 
-        if (_uiState.value.isLoading) {
+        if (_uiState.value.isLoading || _uiState.value.dashboard != null) {
             return
         }
 

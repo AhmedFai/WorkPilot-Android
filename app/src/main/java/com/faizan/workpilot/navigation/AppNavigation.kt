@@ -19,6 +19,7 @@ import com.faizan.workpilot.features.splash.SplashScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import com.faizan.workpilot.features.companyManagement.presentation.screen.companyInfo.CompanyInfoRoute
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.CompanyDashboardRoute
 
 @Composable
@@ -330,6 +331,32 @@ fun AppNavigation() {
                     ?: return@composable
 
             CompanyDashboardRoute(
+                companyId = companyId,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onCompanyInformationClick = {
+                    navController.navigate(
+                        AppRoutes.companyInformation(companyId)
+                    )
+                }
+            )
+        }
+
+        // company information
+        composable(
+            route = AppRoutes.COMPANY_INFORMATION,
+            arguments = listOf(
+                navArgument("companyId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+
+            val companyId = backStackEntry.arguments?.getLong("companyId")
+                ?: return@composable
+
+            CompanyInfoRoute(
                 companyId = companyId,
                 onBackClick = {
                     navController.popBackStack()

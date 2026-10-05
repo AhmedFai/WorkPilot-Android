@@ -1,6 +1,7 @@
 package com.faizan.workpilot.features.companyManagement.data.api
 
 import com.faizan.workpilot.features.companyManagement.data.model.admin.CompanyAdminsResponseDto
+import com.faizan.workpilot.features.companyManagement.data.model.companyInfo.CompanyInfoResponseDto
 import com.faizan.workpilot.features.companyManagement.data.model.dashboard.CompanyOverviewResponseDto
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,4 +21,9 @@ interface CompanyManagementApi {
         @Query("size") size: Int,
         @Query("search") search: String? = null
     ): CompanyAdminsResponseDto
+
+    @GET("companies/{companyId}")
+    suspend fun getCompanyInfo(
+        @Path("companyId") companyId: Long
+    ): CompanyInfoResponseDto
 }

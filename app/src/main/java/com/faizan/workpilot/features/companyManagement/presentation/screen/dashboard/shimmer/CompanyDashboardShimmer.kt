@@ -30,7 +30,6 @@ fun CompanyDashboardShimmer() {
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding()
-            .navigationBarsPadding()
             .padding(
                 start = dimens.screenPaddingHorizontal,
                 top = dimens.screenPaddingVertical,

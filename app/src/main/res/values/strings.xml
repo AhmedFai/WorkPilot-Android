@@ -155,5 +155,18 @@
     <string name="company_settings_danger_zone">Danger Zone</string>
     <string name="company_settings_deactivate_company">Deactivate Company</string>
     <string name="company_settings_deactivate_description">This will prevent all users of this company from accessing the platform. Data will be kept in the system.</string>
+    <string name="company_information_company_details">Company Details</string>
+
+    <string name="company_information_company_name">Company Name</string>
+    <string name="company_information_email">Email</string>
+    <string name="company_information_phone">Phone</string>
+    <string name="company_information_website">Website</string>
+    <string name="company_information_address">Address</string>
+    <string name="company_information_city">City</string>
+    <string name="company_information_state">State</string>
+    <string name="company_information_postal_code">Postal Code</string>
+    <string name="company_information_country">Country</string>
+    <string name="company_information_created_at">Created At</string>
+    <string name="company_information_updated_at">Updated At</string>
 
 </resources>

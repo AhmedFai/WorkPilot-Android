@@ -24,10 +24,6 @@ import com.faizan.workpilot.features.companyManagement.presentation.screen.dashb
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.componenents.CompanyDashboardStats
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.componenents.CompanyDashboardTaskStatus
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.shimmer.CompanyDashboardShimmer
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import com.faizan.workpilot.features.companyManagement.presentation.model.admin.CompanyAdminsUiState
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.componenents.CompanyManagementTab
 import com.faizan.workpilot.features.companyManagement.presentation.screen.admins.CompanyAdminsScreen
@@ -48,7 +44,8 @@ fun CompanyDashboardScreen(
     onSearchQueryChange: (String) -> Unit,
     onLoadNextPage: () -> Unit,
     onAddAdminClick: () -> Unit,
-    onAdminClick: (Long) -> Unit
+    onAdminClick: (Long) -> Unit,
+    onCompanyInformationClick: () -> Unit
 ) {
 
     val dimens = MaterialTheme.dimens
@@ -78,7 +75,6 @@ fun CompanyDashboardScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()
-                    .navigationBarsPadding()
             ) {
 
                 CompanyDashboardHeader(
@@ -172,9 +168,7 @@ fun CompanyDashboardScreen(
                         CompanyManagementTab.SETTINGS -> {
                             CompanySettingsScreen(
                                 companyActive = dashboard.company.active,
-                                onCompanyInformationClick = {
-                                    // Later
-                                },
+                                onCompanyInformationClick = onCompanyInformationClick,
                                 onCompanyStatusClick = {
                                     // Later
                                 },

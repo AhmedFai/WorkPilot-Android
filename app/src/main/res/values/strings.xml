@@ -168,5 +168,13 @@
     <string name="company_information_country">Country</string>
     <string name="company_information_created_at">Created At</string>
     <string name="company_information_updated_at">Updated At</string>
+    <string name="company_information_name_required">Company name is required</string>
+    <string name="company_information_email_required">Email is required</string>
+    <string name="company_information_email_invalid">Enter a valid email address</string>
+    <string name="company_information_edit_title">Edit Information</string>
+    <string name="company_information_address_line_1">Address Line 1</string>
+    <string name="company_information_address_line_2">Address Line 2</string>
+    <string name="company_information_save">Save Information</string>
+    <string name="company_information_cancel">Cancel</string>
 
 </resources>

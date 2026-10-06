@@ -19,7 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
-import com.faizan.workpilot.features.companyManagement.presentation.screen.companyInfo.CompanyInfoIconStyle
+import com.faizan.workpilot.features.companyManagement.presentation.screen.components.CompanyInfoIconStyle
 
 @Composable
 fun CompanyInfoDetailRow(

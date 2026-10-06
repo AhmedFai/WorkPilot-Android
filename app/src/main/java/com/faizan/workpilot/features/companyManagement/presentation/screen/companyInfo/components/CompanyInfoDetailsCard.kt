@@ -23,7 +23,7 @@ import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.Public
 import androidx.compose.ui.res.stringResource
 import com.faizan.workpilot.R
-import com.faizan.workpilot.features.companyManagement.presentation.screen.companyInfo.CompanyInfoIconColors
+import com.faizan.workpilot.features.companyManagement.presentation.screen.components.CompanyInfoIconColors
 
 @Composable
 fun CompanyInfoDetailsCard(

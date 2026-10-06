@@ -7,13 +7,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.faizan.workpilot.features.companyManagement.presentation.companyInfo.CompanyInfoUiEvent
+import com.faizan.workpilot.features.companyManagement.presentation.model.companyInfo.CompanyInfoUiEvent
 import com.faizan.workpilot.features.companyManagement.presentation.viewmodel.companyInfo.CompanyInfoViewModel
 
 @Composable
 fun CompanyInfoRoute(
     companyId: Long,
     onBackClick: () -> Unit,
+    onEditInformationClick: () -> Unit,
     viewModel: CompanyInfoViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -49,6 +50,7 @@ fun CompanyInfoRoute(
                 companyId = companyId
             )
         },
-        onBackClick = onBackClick
+        onBackClick = onBackClick,
+        onEditInformationClick = onEditInformationClick
     )
 }

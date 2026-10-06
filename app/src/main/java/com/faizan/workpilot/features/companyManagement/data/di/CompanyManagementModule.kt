@@ -11,8 +11,10 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 import com.faizan.workpilot.features.companyManagement.data.api.CompanyManagementApi
 import com.faizan.workpilot.features.companyManagement.data.repository.CompanyAdminRepositoryImpl
+import com.faizan.workpilot.features.companyManagement.data.repository.CompanyEditInfoRepositoryImpl
 import com.faizan.workpilot.features.companyManagement.data.repository.CompanyInfoRepositoryImpl
 import com.faizan.workpilot.features.companyManagement.domain.repository.CompanyAdminRepository
+import com.faizan.workpilot.features.companyManagement.domain.repository.CompanyEditInfoRepository
 import com.faizan.workpilot.features.companyManagement.domain.repository.CompanyInfoRepository
 
 @Module
@@ -36,4 +38,10 @@ abstract class CompanyManagementModule {
     abstract fun bindCompanyInfoRepository(
         repository: CompanyInfoRepositoryImpl
     ): CompanyInfoRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCompanyEditInfoRepository(
+        repository: CompanyEditInfoRepositoryImpl
+    ): CompanyEditInfoRepository
 }

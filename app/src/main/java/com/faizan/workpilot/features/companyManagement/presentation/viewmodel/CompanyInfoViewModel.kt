@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.faizan.workpilot.core.network.error.NetworkErrorHandler
 import com.faizan.workpilot.features.companyManagement.domain.usecase.companyInfo.GetCompanyInfoUseCase
-import com.faizan.workpilot.features.companyManagement.presentation.companyInfo.CompanyInfoUiEvent
-import com.faizan.workpilot.features.companyManagement.presentation.companyInfo.CompanyInfoUiState
+import com.faizan.workpilot.features.companyManagement.presentation.model.companyInfo.CompanyInfoUiEvent
+import com.faizan.workpilot.features.companyManagement.presentation.model.companyInfo.CompanyInfoUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow

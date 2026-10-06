@@ -21,6 +21,7 @@ import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.faizan.workpilot.features.companyManagement.presentation.screen.companyInfo.CompanyInfoRoute
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.CompanyDashboardRoute
+import com.faizan.workpilot.features.companyManagement.presentation.screen.editCompanyInfo.EditCompanyInfoRoute
 
 @Composable
 fun AppNavigation() {
@@ -357,6 +358,32 @@ fun AppNavigation() {
                 ?: return@composable
 
             CompanyInfoRoute(
+                companyId = companyId,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onEditInformationClick = {
+                    navController.navigate(
+                        AppRoutes.editCompanyInformation(companyId)
+                    )
+                }
+            )
+        }
+
+        // edit company information
+        composable(
+            route = AppRoutes.EDIT_COMPANY_INFORMATION,
+            arguments = listOf(
+                navArgument("companyId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+
+            val companyId = backStackEntry.arguments?.getLong("companyId")
+                ?: return@composable
+
+            EditCompanyInfoRoute(
                 companyId = companyId,
                 onBackClick = {
                     navController.popBackStack()

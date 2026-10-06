@@ -1,4 +1,4 @@
-package com.faizan.workpilot.features.companyManagement.presentation.companyInfo
+package com.faizan.workpilot.features.companyManagement.presentation.model.companyInfo
 
 import com.faizan.workpilot.core.common.ui.text.UiText
 import com.faizan.workpilot.features.companyManagement.domain.model.companyInfo.CompanyInfo

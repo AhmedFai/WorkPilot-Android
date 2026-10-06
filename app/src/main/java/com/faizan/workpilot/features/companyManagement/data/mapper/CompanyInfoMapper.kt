@@ -3,8 +3,10 @@ package com.faizan.workpilot.features.companyManagement.data.mapper
 import android.R.attr.data
 import com.faizan.workpilot.features.companyManagement.data.model.companyInfo.CompanyInfoDataDto
 import com.faizan.workpilot.features.companyManagement.data.model.companyInfo.CompanyInfoResponseDto
+import com.faizan.workpilot.features.companyManagement.data.model.companyStatus.UpdateCompanyStatusRequest
 import com.faizan.workpilot.features.companyManagement.data.model.editCompanyInfo.UpdateCompanyRequest
 import com.faizan.workpilot.features.companyManagement.domain.model.companyInfo.CompanyInfo
+import com.faizan.workpilot.features.companyManagement.domain.model.companyStatus.UpdateCompanyStatus
 import com.faizan.workpilot.features.companyManagement.domain.model.editCompanyInfo.UpdateCompanyInfo
 
 fun CompanyInfoResponseDto.toDomain(): CompanyInfo {
@@ -42,5 +44,11 @@ fun UpdateCompanyInfo.toRequest(): UpdateCompanyRequest {
         state = state,
         postalCode = postalCode,
         country = country
+    )
+}
+
+fun UpdateCompanyStatus.toRequest(): UpdateCompanyStatusRequest {
+    return UpdateCompanyStatusRequest(
+        active = active
     )
 }

@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import com.faizan.workpilot.R
 import com.faizan.workpilot.core.ui.theme.dimens
 import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.CompanyOverviewCompany
+import com.faizan.workpilot.features.companyManagement.presentation.screen.companyStatus.components.CompanyStatusStyles
 
 @Composable
 fun CompanyDashboardHeader(
@@ -85,9 +86,9 @@ fun CompanyDashboardHeader(
             Surface(
                 shape = MaterialTheme.shapes.small,
                 color = if (company.active) {
-                    MaterialTheme.colorScheme.primaryContainer
+                    CompanyStatusStyles.active.containerColor
                 } else {
-                    MaterialTheme.colorScheme.surfaceVariant
+                    CompanyStatusStyles.inactive.containerColor
                 }
             ) {
                 Text(
@@ -98,8 +99,12 @@ fun CompanyDashboardHeader(
                             R.string.company_dashboard_inactive
                         }
                     ),
-                    style =
-                        MaterialTheme.typography.labelMedium,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = if (company.active) {
+                        CompanyStatusStyles.active.titleColor
+                    } else {
+                        CompanyStatusStyles.inactive.titleColor
+                    },
                     maxLines = 1,
                     modifier = Modifier.padding(
                         horizontal = dimens.spaceS,

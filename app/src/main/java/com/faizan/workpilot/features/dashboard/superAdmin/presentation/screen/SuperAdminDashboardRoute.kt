@@ -16,6 +16,8 @@ fun SuperAdminDashboardRoute(
     onCreateCompanyClick: () -> Unit,
     companyCreated: Boolean,
     onCompanyCreatedHandled: () -> Unit,
+    companyUpdated: Boolean,
+    onCompanyUpdatedHandled: () -> Unit,
     viewModel: SuperAdminDashboardViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -24,6 +26,13 @@ fun SuperAdminDashboardRoute(
         if (companyCreated) {
             viewModel.retry()
             onCompanyCreatedHandled()
+        }
+    }
+
+    LaunchedEffect(companyUpdated) {
+        if (companyUpdated) {
+            viewModel.retry()
+            onCompanyUpdatedHandled()
         }
     }
 

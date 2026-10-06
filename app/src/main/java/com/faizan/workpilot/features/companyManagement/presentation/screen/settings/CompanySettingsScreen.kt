@@ -105,6 +105,7 @@ fun CompanySettingsScreen(
                 )
             ) {
                 CompanySettingsDangerItem(
+                    companyActive = companyActive,
                     onClick = onDeactivateCompanyClick
                 )
             }

@@ -176,5 +176,25 @@
     <string name="company_information_address_line_2">Address Line 2</string>
     <string name="company_information_save">Save Information</string>
     <string name="company_information_cancel">Cancel</string>
+    <string name="company_status_deactivate_title">Deactivate Company?</string>
+    <string name="company_status_activate_title">Activate Company?</string>
+    <string name="company_status_deactivate_message">This will prevent all users of %1$s from accessing the platform. The company data will be kept in the system and can be activated again later.</string>
+    <string name="company_status_activate_message">This will restore access to %1$s and its users.</string>
+    <string name="company_status_cancel">Cancel</string>
+    <string name="company_status_title">Company Status</string>
+    <string name="company_status_current_status">Current Status</string>
+    <string name="company_status_active">Active</string>
+    <string name="company_status_inactive">Inactive</string>
+    <string name="company_status_active_description">This company is currently active and operational.</string>
+    <string name="company_status_inactive_description">This company is currently inactive and users cannot access the platform.</string>
+    <string name="company_status_danger_zone">Danger Zone</string>
+    <string name="company_status_deactivate">Deactivate Company</string>
+    <string name="company_status_activate">Activate Company</string>
+    <string name="company_status_deactivate_description">This will prevent users from accessing the company.</string>
+    <string name="company_status_activate_description">This will restore access to the company and its users.</string>
+    <string name="company_status_change">Change</string>
+    <string name="company_status_manage_description">Manage company status</string>
+    <string name="company_status_deactivate_action">Deactivate</string>
+    <string name="company_status_activate_action">Activate</string>
 
 </resources>

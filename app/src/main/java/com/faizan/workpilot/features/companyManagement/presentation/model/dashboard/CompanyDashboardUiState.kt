@@ -5,6 +5,7 @@ import com.faizan.workpilot.features.companyManagement.domain.model.dashboard.Co
 
 data class CompanyDashboardUiState(
     val isLoading: Boolean = false,
+    val isUpdating: Boolean = false,
     val dashboard: CompanyDashboard? = null,
     val error: UiText? = null
 )

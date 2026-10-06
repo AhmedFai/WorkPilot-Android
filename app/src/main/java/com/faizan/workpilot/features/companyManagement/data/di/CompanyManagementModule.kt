@@ -13,9 +13,11 @@ import com.faizan.workpilot.features.companyManagement.data.api.CompanyManagemen
 import com.faizan.workpilot.features.companyManagement.data.repository.CompanyAdminRepositoryImpl
 import com.faizan.workpilot.features.companyManagement.data.repository.CompanyEditInfoRepositoryImpl
 import com.faizan.workpilot.features.companyManagement.data.repository.CompanyInfoRepositoryImpl
+import com.faizan.workpilot.features.companyManagement.data.repository.CompanyStatusRepositoryImpl
 import com.faizan.workpilot.features.companyManagement.domain.repository.CompanyAdminRepository
 import com.faizan.workpilot.features.companyManagement.domain.repository.CompanyEditInfoRepository
 import com.faizan.workpilot.features.companyManagement.domain.repository.CompanyInfoRepository
+import com.faizan.workpilot.features.companyManagement.domain.repository.CompanyStatusRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -44,4 +46,10 @@ abstract class CompanyManagementModule {
     abstract fun bindCompanyEditInfoRepository(
         repository: CompanyEditInfoRepositoryImpl
     ): CompanyEditInfoRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCompanyStatusRepository(
+        repository: CompanyStatusRepositoryImpl
+    ): CompanyStatusRepository
 }

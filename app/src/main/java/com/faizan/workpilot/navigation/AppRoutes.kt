@@ -32,4 +32,10 @@ object AppRoutes {
     fun editCompanyInformation(companyId: Long): String {
         return "edit_company_information/$companyId"
     }
+
+    const val COMPANY_STATUS = "company_status/{companyId}"
+
+    fun companyStatus(companyId: Long): String {
+        return "company_status/$companyId"
+    }
 }

@@ -22,6 +22,7 @@ import androidx.compose.ui.res.stringResource
 import com.faizan.workpilot.R
 import com.faizan.workpilot.core.ui.theme.dimens
 import com.faizan.workpilot.features.companyManagement.domain.model.companyInfo.CompanyInfo
+import com.faizan.workpilot.features.companyManagement.presentation.screen.companyStatus.components.CompanyStatusStyles
 
 @Composable
 fun CompanyInfoSummaryCard(
@@ -87,13 +88,15 @@ fun CompanyInfoSummaryCard(
                 )
             }
 
+            val statusStyle = if (company.active) {
+                CompanyStatusStyles.active
+            } else {
+                CompanyStatusStyles.inactive
+            }
+
             Surface(
                 shape = MaterialTheme.shapes.small,
-                color = if (company.active) {
-                    MaterialTheme.colorScheme.primaryContainer
-                } else {
-                    MaterialTheme.colorScheme.surfaceVariant
-                }
+                color = statusStyle.containerColor
             ) {
                 Text(
                     text = stringResource(
@@ -103,7 +106,8 @@ fun CompanyInfoSummaryCard(
                             R.string.company_dashboard_inactive
                         }
                     ),
-                    style = MaterialTheme.typography.labelSmall,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = statusStyle.titleColor,
                     modifier = Modifier.padding(
                         horizontal = dimens.spaceS,
                         vertical = dimens.spaceXS

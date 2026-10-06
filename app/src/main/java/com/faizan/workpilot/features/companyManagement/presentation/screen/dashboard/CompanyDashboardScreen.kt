@@ -45,7 +45,9 @@ fun CompanyDashboardScreen(
     onLoadNextPage: () -> Unit,
     onAddAdminClick: () -> Unit,
     onAdminClick: (Long) -> Unit,
-    onCompanyInformationClick: () -> Unit
+    onCompanyInformationClick: () -> Unit,
+    onCompanyStatusClick: () -> Unit,
+    onDeactivateCompanyClick: () -> Unit
 ) {
 
     val dimens = MaterialTheme.dimens
@@ -169,15 +171,11 @@ fun CompanyDashboardScreen(
                             CompanySettingsScreen(
                                 companyActive = dashboard.company.active,
                                 onCompanyInformationClick = onCompanyInformationClick,
-                                onCompanyStatusClick = {
-                                    // Later
-                                },
+                                onCompanyStatusClick = onCompanyStatusClick,
                                 onAdminManagementClick = {
                                     // Later
                                 },
-                                onDeactivateCompanyClick = {
-                                    // Later
-                                }
+                                onDeactivateCompanyClick = onDeactivateCompanyClick
                             )
                         }
                     }

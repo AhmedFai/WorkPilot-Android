@@ -2,10 +2,12 @@ package com.faizan.workpilot.features.companyManagement.data.api
 
 import com.faizan.workpilot.features.companyManagement.data.model.admin.CompanyAdminsResponseDto
 import com.faizan.workpilot.features.companyManagement.data.model.companyInfo.CompanyInfoResponseDto
+import com.faizan.workpilot.features.companyManagement.data.model.companyStatus.UpdateCompanyStatusRequest
 import com.faizan.workpilot.features.companyManagement.data.model.dashboard.CompanyOverviewResponseDto
 import com.faizan.workpilot.features.companyManagement.data.model.editCompanyInfo.UpdateCompanyRequest
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -34,5 +36,11 @@ interface CompanyManagementApi {
     suspend fun updateCompany(
         @Path("companyId") companyId: Long,
         @Body request: UpdateCompanyRequest
+    ): CompanyInfoResponseDto
+
+    @PATCH("companies/{companyId}/status")
+    suspend fun updateCompanyStatus(
+        @Path("companyId") companyId: Long,
+        @Body request: UpdateCompanyStatusRequest
     ): CompanyInfoResponseDto
 }

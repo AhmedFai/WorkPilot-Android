@@ -20,6 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.faizan.workpilot.features.companyManagement.presentation.screen.companyInfo.CompanyInfoRoute
+import com.faizan.workpilot.features.companyManagement.presentation.screen.companyStatus.CompanyStatusRoute
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.CompanyDashboardRoute
 import com.faizan.workpilot.features.companyManagement.presentation.screen.editCompanyInfo.EditCompanyInfoRoute
 
@@ -259,6 +260,17 @@ fun AppNavigation() {
                     mutableStateOf(false)
                 }
 
+            val companyUpdated by currentBackStackEntry
+                ?.savedStateHandle
+                ?.getStateFlow(
+                    "company_updated",
+                    false
+                )
+                ?.collectAsStateWithLifecycle()
+                ?: remember {
+                    mutableStateOf(false)
+                }
+
             SuperAdminDashboardRoute(
 
                 onCompanyClick = { companyId ->
@@ -290,6 +302,17 @@ fun AppNavigation() {
                         ?.savedStateHandle
                         ?.set(
                             "company_created",
+                            false
+                        )
+                },
+
+                companyUpdated = companyUpdated,
+
+                onCompanyUpdatedHandled = {
+                    currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.set(
+                            "company_updated",
                             false
                         )
                 }
@@ -331,15 +354,45 @@ fun AppNavigation() {
                 backStackEntry.arguments?.getLong("companyId")
                     ?: return@composable
 
+            val companyStatusUpdated by backStackEntry
+                .savedStateHandle
+                .getStateFlow(
+                    "company_status_updated",
+                    false
+                )
+                .collectAsStateWithLifecycle()
+
             CompanyDashboardRoute(
                 companyId = companyId,
                 onBackClick = {
+                    navController
+                        .previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set(
+                            "company_updated",
+                            true
+                        )
+
                     navController.popBackStack()
                 },
                 onCompanyInformationClick = {
                     navController.navigate(
                         AppRoutes.companyInformation(companyId)
                     )
+                },
+                onCompanyStatusClick = {
+                    navController.navigate(
+                        AppRoutes.companyStatus(companyId)
+                    )
+                },
+                companyStatusUpdated = companyStatusUpdated,
+                onCompanyStatusUpdatedHandled = {
+                    backStackEntry
+                        .savedStateHandle
+                        .set(
+                            "company_status_updated",
+                            false
+                        )
                 }
             )
         }
@@ -386,6 +439,35 @@ fun AppNavigation() {
             EditCompanyInfoRoute(
                 companyId = companyId,
                 onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        // company status
+        composable(
+            route = AppRoutes.COMPANY_STATUS,
+            arguments = listOf(
+                navArgument("companyId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+
+            val companyId = backStackEntry.arguments?.getLong("companyId")
+                ?: return@composable
+
+            CompanyStatusRoute(
+                companyId = companyId,
+                onBackClick = {
+                    navController
+                        .previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set(
+                            "company_status_updated",
+                            true
+                        )
+
                     navController.popBackStack()
                 }
             )

@@ -173,7 +173,11 @@ fun CompanyDashboardScreen(
                                 onCompanyInformationClick = onCompanyInformationClick,
                                 onCompanyStatusClick = onCompanyStatusClick,
                                 onAdminManagementClick = {
-                                    // Later
+                                    coroutineScope.launch {
+                                        pagerState.animateScrollToPage(
+                                            CompanyManagementTab.ADMINS.ordinal
+                                        )
+                                    }
                                 },
                                 onDeactivateCompanyClick = onDeactivateCompanyClick
                             )

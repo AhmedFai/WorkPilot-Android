@@ -23,6 +23,10 @@ fun CompanyDashboardRoute(
     onCompanyStatusClick: () -> Unit,
     companyStatusUpdated: Boolean,
     onCompanyStatusUpdatedHandled: () -> Unit,
+    onAddAdminClick: () -> Unit,
+    onAdminClick: (Long) -> Unit,
+    companyAdminCreated: Boolean,
+    onCompanyAdminCreatedHandled: () -> Unit,
     viewModel: CompanyDashboardViewModel = hiltViewModel(),
     adminsViewModel: CompanyAdminsViewModel = hiltViewModel()
 ) {
@@ -54,6 +58,14 @@ fun CompanyDashboardRoute(
             onCompanyStatusUpdatedHandled()
         }
     }
+
+    LaunchedEffect(companyAdminCreated) {
+        if (companyAdminCreated) {
+            adminsViewModel.getCompanyAdmins(companyId)
+            onCompanyAdminCreatedHandled()
+        }
+    }
+
 
     LaunchedEffect(Unit) {
 
@@ -100,15 +112,11 @@ fun CompanyDashboardRoute(
                 companyId = companyId
             )
         },
-        onAddAdminClick = {
-            // Later
-        },
-        onAdminClick = {
-            // Later
-        },
+        onAddAdminClick = onAddAdminClick,
+        onAdminClick = onAdminClick,
         onDeactivateCompanyClick = {
             showStatusDialog = true
-        }
+        },
     )
 
     if (showStatusDialog && uiState.dashboard != null) {

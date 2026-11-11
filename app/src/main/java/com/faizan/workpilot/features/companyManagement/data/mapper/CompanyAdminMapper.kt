@@ -5,6 +5,10 @@ import com.faizan.workpilot.features.companyManagement.data.model.admin.CompanyA
 import com.faizan.workpilot.features.companyManagement.data.model.admin.CompanyAdminsResponseDto
 import com.faizan.workpilot.features.companyManagement.domain.model.admin.CompanyAdmin
 import com.faizan.workpilot.features.companyManagement.domain.model.admin.CompanyAdminPage
+import com.faizan.workpilot.features.companyManagement.data.model.admin.CompanyAdminDetailsDto
+import com.faizan.workpilot.features.companyManagement.data.model.admin.CompanyAdminDetailsResponseDto
+import com.faizan.workpilot.features.companyManagement.domain.model.admin.CompanyAdminDetails
+import com.faizan.workpilot.features.companyManagement.data.model.admin.CreateCompanyAdminResponseDto
 
 fun CompanyAdminsResponseDto.toDomain(): CompanyAdminPage {
     return data.toDomain()
@@ -31,3 +35,25 @@ private fun CompanyAdminDto.toDomain(): CompanyAdmin {
         updatedAt = updatedAt
     )
 }
+
+fun CompanyAdminDetailsResponseDto.toDomain(): CompanyAdminDetails =
+    data.toDomain()
+
+ fun CompanyAdminDetailsDto.toDomain(): CompanyAdminDetails =
+    CompanyAdminDetails(
+        id = id,
+        firstName = firstName,
+        lastName = lastName,
+        email = email,
+        role = role,
+        companyId = companyId,
+        companyName = companyName,
+        phoneNumber = phoneNumber,
+        designation = designation,
+        active = active,
+        createdAt = createdAt,
+        updatedAt = updatedAt
+    )
+
+fun CreateCompanyAdminResponseDto.toDomain(): CompanyAdmin =
+    data.toDomain()

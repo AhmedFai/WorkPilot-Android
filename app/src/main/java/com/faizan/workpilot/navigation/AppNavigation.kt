@@ -23,6 +23,9 @@ import com.faizan.workpilot.features.companyManagement.presentation.screen.compa
 import com.faizan.workpilot.features.companyManagement.presentation.screen.companyStatus.CompanyStatusRoute
 import com.faizan.workpilot.features.companyManagement.presentation.screen.dashboard.CompanyDashboardRoute
 import com.faizan.workpilot.features.companyManagement.presentation.screen.editCompanyInfo.EditCompanyInfoRoute
+import com.faizan.workpilot.features.companyManagement.presentation.screen.adminDetails.CompanyAdminDetailsRoute
+import com.faizan.workpilot.features.companyManagement.presentation.screen.adminDetails.CreateCompanyAdminRoute
+import com.faizan.workpilot.features.companyManagement.presentation.screen.adminDetails.EditCompanyAdminRoute
 
 @Composable
 fun AppNavigation() {
@@ -362,6 +365,14 @@ fun AppNavigation() {
                 )
                 .collectAsStateWithLifecycle()
 
+            val companyAdminCreated by backStackEntry
+                .savedStateHandle
+                .getStateFlow(
+                    "company_admin_created",
+                    false
+                )
+                .collectAsStateWithLifecycle()
+
             CompanyDashboardRoute(
                 companyId = companyId,
                 onBackClick = {
@@ -393,7 +404,25 @@ fun AppNavigation() {
                             "company_status_updated",
                             false
                         )
-                }
+                },
+                companyAdminCreated = companyAdminCreated,
+
+                onCompanyAdminCreatedHandled = {
+                    backStackEntry.savedStateHandle.set(
+                        "company_admin_created",
+                        false
+                    )
+                },
+                onAddAdminClick = {
+                    navController.navigate(
+                        AppRoutes.createCompanyAdmin(companyId)
+                    )
+                },
+                onAdminClick = { adminId ->
+                    navController.navigate(
+                        AppRoutes.companyAdminDetails(companyId, adminId)
+                    )
+                },
             )
         }
 
@@ -472,6 +501,100 @@ fun AppNavigation() {
                 }
             )
         }
+
+
+        composable(
+            route = AppRoutes.COMPANY_ADMIN_DETAILS,
+            arguments = listOf(
+                navArgument("companyId") {
+                    type = NavType.LongType
+                },
+                navArgument("adminId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+
+            val companyId = backStackEntry.arguments
+                ?.getLong("companyId") ?: return@composable
+
+            val adminId = backStackEntry.arguments
+                ?.getLong("adminId") ?: return@composable
+
+            CompanyAdminDetailsRoute(
+                companyId = companyId,
+                adminId = adminId,
+                onBackClick = {
+                    navController.popBackStack()
+                },
+                onEditAdminClick = {
+                    navController.navigate(
+                        AppRoutes.editCompanyAdmin(companyId, adminId)
+                    )
+                },
+                onViewActivityClick = {
+                    // Activity feature pending
+                }
+            )
+        }
+
+
+        composable(
+            route = AppRoutes.CREATE_COMPANY_ADMIN,
+            arguments = listOf(
+                navArgument("companyId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+
+            val companyId = backStackEntry.arguments
+                ?.getLong("companyId") ?: return@composable
+
+            CreateCompanyAdminRoute(
+                companyId = companyId,
+                onAdminCreated = {
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("company_admin_created", true)
+
+                    navController.popBackStack()
+                },
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+
+        // Edit Company Admin
+        composable(
+            route = AppRoutes.EDIT_COMPANY_ADMIN,
+            arguments = listOf(
+                navArgument("companyId") {
+                    type = NavType.LongType
+                },
+                navArgument("adminId") {
+                    type = NavType.LongType
+                }
+            )
+        ) { backStackEntry ->
+
+            val companyId = backStackEntry.arguments
+                ?.getLong("companyId") ?: return@composable
+
+            val adminId = backStackEntry.arguments
+                ?.getLong("adminId") ?: return@composable
+
+            EditCompanyAdminRoute(
+                companyId = companyId,
+                adminId = adminId,
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
 
     }
 }

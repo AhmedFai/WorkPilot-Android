@@ -38,4 +38,28 @@ object AppRoutes {
     fun companyStatus(companyId: Long): String {
         return "company_status/$companyId"
     }
+
+    const val CREATE_COMPANY_ADMIN =
+        "create_company_admin/{companyId}"
+
+    fun createCompanyAdmin(companyId: Long): String {
+        return "create_company_admin/$companyId"
+    }
+
+    const val COMPANY_ADMIN_DETAILS =
+        "company_admin_details/{companyId}/{adminId}"
+
+    fun companyAdminDetails(
+        companyId: Long,
+        adminId: Long
+    ): String {
+        return "company_admin_details/$companyId/$adminId"
+    }
+
+    const val EDIT_COMPANY_ADMIN =
+        "edit_company_admin/{companyId}/{adminId}"
+
+    fun editCompanyAdmin(companyId: Long, adminId: Long) =
+        "edit_company_admin/$companyId/$adminId"
+
 }
